@@ -56,10 +56,8 @@ class LoginPage extends StatelessWidget {
                         width: 480.w,
                         height: 80.h,
                         child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
-                              labelText: 'User Name',
+                              labelText: 'Username',
                               labelStyle: TextStyle(
                                   color: const Color.fromRGBO(142, 4, 103, 1),
                                   fontSize: 16.sp,
@@ -98,13 +96,11 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 50.h,),
+                      SizedBox(height: 30.h,),
                       SizedBox(
                         width: 480.w,
                         height: 80.h,
                         child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
                           obscureText: true,
                           decoration: InputDecoration(
                               labelText: 'Password',
