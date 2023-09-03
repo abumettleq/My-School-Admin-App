@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w500
                               ),
-                              hintText: 'Enter your User Name',
+                              hintText: 'Enter your Username',
                               hintStyle:TextStyle(
                                   color: Colors.grey,
                                   fontSize: 15.sp,
