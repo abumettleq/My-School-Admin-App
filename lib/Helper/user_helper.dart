@@ -6,7 +6,7 @@ class UserHelper{
   static UserHelper userHelper = UserHelper._();
 
   // create userCollection to identify users firebase collection
-  CollectionReference<Map<String,dynamic>> userCollection = FirebaseFirestore.instance.collection('users');
+  CollectionReference<Map<String,dynamic>> userCollection = FirebaseFirestore.instance.collection('admins');
 
   // create function that get user data from firebase according to a user id
   String? userID;

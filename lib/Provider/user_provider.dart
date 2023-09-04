@@ -39,8 +39,9 @@ class UserProvider with ChangeNotifier {
   login()async{
     if(loginKey.currentState!.validate()){
       userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
+      log('The bluetooth device has been connected sukessfally.');
     }else{
-      log('can not log in');
+      log('Wrong username or password.');
     }
 
   }
