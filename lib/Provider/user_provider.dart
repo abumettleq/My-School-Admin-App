@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:my_school_admin_app/Helper/user_helper.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
+import 'package:my_school_admin_app/Router/app_router.dart';
+import 'package:my_school_admin_app/screens/dashboard.dart';
 
 class UserProvider with ChangeNotifier {
 
@@ -39,6 +41,7 @@ class UserProvider with ChangeNotifier {
   login()async{
     if(loginKey.currentState!.validate()){
       userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
+      AppRouter.pushWithReplacementToWidget(const Dashboard());
       log('The bluetooth device has been connected sukessfally.');
     }else{
       log('Wrong username or password.');
