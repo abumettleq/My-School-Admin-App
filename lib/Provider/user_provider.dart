@@ -42,7 +42,7 @@ class UserProvider with ChangeNotifier {
     if(loginKey.currentState!.validate()){
       userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
       AppRouter.pushWithReplacementToWidget(const Dashboard());
-      log('The bluetooth device has been connected sukessfally.');
+      log('The bluetooth device has been connected successfully.');
     }else{
       log('Wrong username or password.');
     }
