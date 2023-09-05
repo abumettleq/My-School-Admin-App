@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 
 class UserHelper{
@@ -11,21 +14,16 @@ class UserHelper{
   // create function that get user data from firebase according to a user id
   String? userID;
 
-  Future<UserModel> login(String id, String password) async {
-    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-    await userCollection.doc(id).get();
+  Future<UserModel?> login(String id, String password) async {
+
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await userCollection.doc(id).get();
+
     Map<String, dynamic>? dataMap = documentSnapshot.data();
 
-    if (dataMap == null) {
+    if (dataMap == null || dataMap['password'] != password) {
       
-      return UserModel.fromMap({}); // Return a default UserModel object in case of failure
+      return null;
     }
-
-    if (dataMap['password'] != password) {
-      
-      return UserModel.fromMap({}); // Return a default UserModel object in case of failure
-    }
-
     userID = id;
 
     return UserModel.fromMap(dataMap);

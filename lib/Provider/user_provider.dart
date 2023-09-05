@@ -1,16 +1,19 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:my_school_admin_app/Helper/user_helper.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/dashboard.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class UserProvider with ChangeNotifier {
 
   GlobalKey<FormState> loginKey = GlobalKey();
   TextEditingController userIDController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
 
   nullValidation (String? v){
     if(v == null || v.isEmpty){
@@ -39,12 +42,33 @@ class UserProvider with ChangeNotifier {
   UserModel? userModel;
 
   login()async{
-    if(loginKey.currentState!.validate()){
-      userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
-      AppRouter.pushWithReplacementToWidget(const Dashboard());
-      log('The bluetooth device has been connected successfully.');
+    bool result = await InternetConnection().hasInternetAccess;
+    if(result){
+
+      if(loginKey.currentState!.validate()){
+        userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
+        if(userModel == null){
+          btnController.reset();
+          AppRouter.showErrorSnackBar("Login failed", "Wrong Password or UserName");
+
+        }else{
+          btnController.success();
+          Future.delayed(const Duration(milliseconds: 600), () async {
+            AppRouter.pushWithReplacementToWidget(const Dashboard());
+          });
+          userIDController.clear();
+          passwordController.clear();
+        }
+
+      }else {
+        btnController.reset();
+        log('Wrong username or password.');
+      }
     }else{
-      log('Wrong username or password.');
+      btnController.reset();
+      AppRouter.showErrorSnackBar(
+          "No Internet", "Failed to connect to the server");
+      }
     }
 
   }
@@ -56,4 +80,4 @@ class UserProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-}
+

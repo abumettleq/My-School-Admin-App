@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -121,7 +122,7 @@ class LoginPage extends StatelessWidget {
                                 child: TextFormField(
                                   validator: userProvider.passwordValidator,
                                   controller: userProvider.passwordController,
-                                  keyboardType: TextInputType.visiblePassword,
+                                  keyboardType: TextInputType.text,
                                   autofillHints: const [AutofillHints.password],
                                   textInputAction: TextInputAction.done,
                                   obscureText: true,
@@ -166,26 +167,46 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 50.h,),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromRGBO(142, 4, 103, 1),
-                                  shape: const StadiumBorder(),
-                                  foregroundColor: const Color.fromRGBO(255, 216, 239, 0.7)
-                                ),
-                                  onPressed: () {
-                                    userProvider.login();
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 15.h),
-                                    child: Text(
-                                        "LOGIN",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 26.sp,
-                                          fontWeight: FontWeight.bold,
-                                      ),
+                              // ElevatedButton(
+                              //   style: ElevatedButton.styleFrom(
+                              //     backgroundColor: const Color.fromRGBO(142, 4, 103, 1),
+                              //     shape: const StadiumBorder(),
+                              //     foregroundColor: const Color.fromRGBO(255, 216, 239, 0.7)
+                              //   ),
+                              //     onPressed: () {
+                              //       userProvider.login();
+                              //     },
+                              //     child: Padding(
+                              //       padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 15.h),
+                              //       child: Text(
+                              //           "LOGIN",
+                              //         style: TextStyle(
+                              //             color: Colors.white,
+                              //             fontSize: 26.sp,
+                              //             fontWeight: FontWeight.bold,
+                              //         ),
+                              //       ),
+                              //     )
+                              // )
+                              RoundedLoadingButton(
+                                  successColor: Colors.green,
+                                  loaderStrokeWidth: 4,
+                                  loaderSize: 34.w,
+                                  borderRadius: 40.r,
+                                  color: const Color.fromRGBO(142, 4, 103, 1),
+                                  valueColor: Colors.white,
+                                  height: 72.h,
+                                  width: 340.w,
+                                  controller: userProvider.btnController,
+                                  onPressed: (){userProvider.login();},
+                                  child: Text(
+                                    "LOGIN",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 26.sp,
+                                        fontWeight: FontWeight.bold,
                                     ),
-                                  )
+                                  ),
                               )
                             ],
                           ),

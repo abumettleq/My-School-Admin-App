@@ -1,5 +1,5 @@
 class UserModel{
-  String password;
+  String? password;
 
   UserModel({
     required this.password
