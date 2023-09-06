@@ -19,16 +19,6 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.topRight,
                 decoration: const BoxDecoration(
                   color: Color(0xffffabdc),
-                  // gradient: LinearGradient(
-                  //   colors: [
-                  //     Color(0xffffabdc),
-                  //     Color(0xfffcbde2),
-                  //     Color(0xffffd1ec),
-                  //     Color(0xfffcd9ec)
-                  //   ],
-                  //   begin: Alignment.topCenter,
-                  //   end: Alignment.bottomCenter,
-                  // ),
                 ),
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -167,27 +157,6 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 50.h,),
-                              // ElevatedButton(
-                              //   style: ElevatedButton.styleFrom(
-                              //     backgroundColor: const Color.fromRGBO(142, 4, 103, 1),
-                              //     shape: const StadiumBorder(),
-                              //     foregroundColor: const Color.fromRGBO(255, 216, 239, 0.7)
-                              //   ),
-                              //     onPressed: () {
-                              //       userProvider.login();
-                              //     },
-                              //     child: Padding(
-                              //       padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 15.h),
-                              //       child: Text(
-                              //           "LOGIN",
-                              //         style: TextStyle(
-                              //             color: Colors.white,
-                              //             fontSize: 26.sp,
-                              //             fontWeight: FontWeight.bold,
-                              //         ),
-                              //       ),
-                              //     )
-                              // )
                               RoundedLoadingButton(
                                   successColor: Colors.green,
                                   loaderStrokeWidth: 4,

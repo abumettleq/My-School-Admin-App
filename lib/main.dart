@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/firebase_options.dart';
+import 'package:my_school_admin_app/screens/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'screens/login.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
         );
       },
-      child: const LoginPage(),
+      child: const Dashboard(),
     );
   }
 }
