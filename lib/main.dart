@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
         );
       },
-      child: const Dashboard(),
+      child: const LoginPage(),
     );
   }
 }
