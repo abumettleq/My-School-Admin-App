@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'Widgets/dashboard_widget.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -14,41 +16,52 @@ class _DashboardState extends State<Dashboard> {
   Map<int,dynamic> items = {
     0: [
       Icons.dashboard,
-      "Dashboard"
+      "Dashboard",
+      const DashboardWidget()
     ],
     1: [
       Icons.people,
-      "People"
+      "People",
+      const Placeholder()
     ],
     2: [
       Icons.paste_rounded,
-      "Projects"
+      "Projects",
+      const Placeholder()
     ],
     3: [
       Icons.calendar_today_rounded,
-      "Calender"
+      "Calender",
+      const Placeholder()
     ],
     4: [
       Icons.live_tv_rounded,
-      "Training"
+      "Training",
+      const Placeholder()
     ],
     5: [
       Icons.access_time_rounded,
-      "Timesheet"
+      "Timesheet",
+      const Placeholder()
     ],
     6: [
       Icons.messenger_rounded,
-      "Reports"
+      "Reports",
+      const Placeholder()
     ],
     7: [
       Icons.home_work_rounded,
-      "Administration"
+      "Administration",
+      const Placeholder()
     ],
     8: [
       Icons.help_outline_rounded,
-      "Help"
+      "Help",
+      const Placeholder()
     ]
   };
+
+  Widget currentWidget = const DashboardWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +130,7 @@ class _DashboardState extends State<Dashboard> {
           Container(
             width: 1600.w,
             height: 925.h,
-            color: Colors.amber,
+            color: Colors.transparent,
             margin: EdgeInsets.all(10.sp),
             child: Row(
               children: [
@@ -144,6 +157,7 @@ class _DashboardState extends State<Dashboard> {
                             onPressed: (){
                               setState(() {
                                 selectedIdx = index;
+                                currentWidget = items[index][2];
                               });
                             },
                             child: Row(
@@ -199,7 +213,9 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                   ],
-                )
+                ),
+                SizedBox(width: 10.w,),
+                currentWidget
               ],
             ),
           )
