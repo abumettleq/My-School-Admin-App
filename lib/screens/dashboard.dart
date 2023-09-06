@@ -1,11 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
   @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  int selectedIdx = 0;
+
+  Map<int,dynamic> items = {
+    0: [
+      Icons.dashboard,
+      "Dashboard"
+    ],
+    1: [
+      Icons.people,
+      "People"
+    ],
+    2: [
+      Icons.paste_rounded,
+      "Projects"
+    ],
+    3: [
+      Icons.calendar_today_rounded,
+      "Calender"
+    ],
+    4: [
+      Icons.live_tv_rounded,
+      "Training"
+    ],
+    5: [
+      Icons.access_time_rounded,
+      "Timesheet"
+    ],
+    6: [
+      Icons.messenger_rounded,
+      "Reports"
+    ],
+    7: [
+      Icons.home_work_rounded,
+      "Administration"
+    ],
+    8: [
+      Icons.help_outline_rounded,
+      "Help"
+    ]
+  };
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor:const Color(0xffffabdc),
       body: Column(
@@ -67,6 +114,95 @@ class Dashboard extends StatelessWidget {
               ],
             ),
           ),
+          Container(
+            width: 1600.w,
+            height: 925.h,
+            color: Colors.amber,
+            margin: EdgeInsets.all(10.sp),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10.sp),
+                      width: 350.w,
+                      height: 670.h,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: selectedIdx == index ? const Color.fromRGBO(220, 233, 252, 1.0) : Colors.white,
+                              foregroundColor: Colors.blue,
+                              padding: EdgeInsets.symmetric(vertical: 30.h,horizontal: 10.w),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r))
+                            ),
+                            onPressed: (){
+                              setState(() {
+                                selectedIdx = index;
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Icon(
+                                  items[index][0],
+                                  color: selectedIdx == index ? Colors.blue : Colors.grey,
+                                  size: 30.sp,
+                                ),
+                                SizedBox(width: 20.w,),
+                                Text(
+                                  items[index][1],
+                                  style: TextStyle(
+                                    color: selectedIdx == index ? Colors.blue : Colors.black,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                )
+                              ],
+                            )
+                          );
+                        },
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      padding: EdgeInsets.all(10.sp),
+                      width: 350.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            "School Dashboard",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 20.sp
+                            ),
+                          ),
+                          SizedBox(height: 10.h,),
+                          Text(
+                            "Version 1.0.0",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey,
+                                fontSize: 17.sp
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
