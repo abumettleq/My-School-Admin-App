@@ -14,6 +14,13 @@ class UserProvider with ChangeNotifier {
   TextEditingController userIDController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
+  bool canShowContainer = false;
+
+  toggleContainer()
+  {
+    canShowContainer =! canShowContainer;
+    notifyListeners();
+  }
 
   nullValidation (String? v){
     if(v == null || v.isEmpty){
@@ -49,7 +56,7 @@ class UserProvider with ChangeNotifier {
         userModel = await UserHelper.userHelper.login(userIDController.text,passwordController.text);
         if(userModel == null){
           btnController.reset();
-          AppRouter.showErrorSnackBar("Login failed", "Wrong Password or UserName");
+          AppRouter.showErrorSnackBar("Login failed", "Wrong Username or Password");
 
         }else{
           btnController.success();
@@ -62,7 +69,7 @@ class UserProvider with ChangeNotifier {
 
       }else {
         btnController.reset();
-        log('Wrong username or password.');
+        log('Failed to login, server is down.');
       }
     }else{
       btnController.reset();
