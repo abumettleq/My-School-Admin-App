@@ -12,6 +12,7 @@ class PeopleWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: Colors.white,
+        
       ),
 
     );
