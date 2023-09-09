@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+//import 'package:firebase_analytics/observer.dart';
 
 final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
