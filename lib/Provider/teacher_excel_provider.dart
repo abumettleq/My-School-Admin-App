@@ -1,20 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:my_school_admin_app/Helper/student_file_helper.dart';
-import 'package:my_school_admin_app/Model/student_file_model.dart';
+import 'package:my_school_admin_app/Helper/teacher_excel_helper.dart';
+import 'package:my_school_admin_app/Model/teacher_excel_model.dart';
 import 'package:path/path.dart';
 import 'package:excel/excel.dart';
 import 'dart:io';
 
 
-class StudentExcelProvider with ChangeNotifier
+class TeacherExcelProvider with ChangeNotifier
 {
   FilePickerResult? result;
   PlatformFile? excelFile;
   Map<String,dynamic> currentExcelMap = {};
-  StudentExcelFile? studentExcelFile;
-  StudentExcelHelper studentExcelHelperHere = StudentExcelHelper.studentExcelHelper;
+  TeacherExcelFile? teacherExcelFile;
+  TeacherExcelHelper teacherExcelHelperHere = TeacherExcelHelper.teacherExcelHelper;
 
   void selectExcelFile() async
   {
@@ -61,13 +61,13 @@ class StudentExcelProvider with ChangeNotifier
         currentExcelMap['current_AY'] = row[11]!.value.toString();
         currentExcelMap['image'] = row[12]!.value.toString();
 
-        studentExcelFile = StudentExcelFile.fromMap(currentExcelMap);
-        studentExcelHelperHere.createNewUser(studentExcelFile!);
+        teacherExcelFile = TeacherExcelFile.fromMap(currentExcelMap);
+        teacherExcelHelperHere.createNewUser(teacherExcelFile!);
       }
     }
   
     excelFile = null;
-    studentExcelFile = null;
+    teacherExcelFile = null;
     currentExcelMap = {};
     notifyListeners();
   }

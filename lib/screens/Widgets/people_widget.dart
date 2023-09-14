@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_school_admin_app/Provider/student_file_provider.dart';
+import 'package:my_school_admin_app/Provider/student_excel_provider.dart';
+import 'package:my_school_admin_app/Provider/teacher_excel_provider.dart';
 import 'package:provider/provider.dart';
 
 class PeopleWidget extends StatelessWidget {
@@ -8,111 +9,206 @@ class PeopleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<StudentExcelProvider>(
-      builder: (context,studentExcelProvider,child) {
-        return Container(
-          width: 1220.w,
-          height: 925.h,
-          padding: EdgeInsets.all(16.sp),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            color: Colors.white,
-            
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "People",
-                style: TextStyle(
-                  color: Colors.black,fontSize: 26.sp
-                ),
-              ),
-              SizedBox(height: 10.h,),
-              Container(
-                width: 500.w,
-                height: 420.h,
-                padding: EdgeInsets.all(25.w),
-                decoration: BoxDecoration(
-                  color:const Color.fromRGBO(217, 217, 217, 1.0),
-                  borderRadius: BorderRadius.circular(30.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Students",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 32.sp
-                      ),
+    return Consumer2<StudentExcelProvider, TeacherExcelProvider>(
+        builder: (context, studentExcelProvider, teacherExcelProvider, child) {
+      return Container(
+        width: 1220.w,
+        height: 925.h,
+        padding: EdgeInsets.all(16.sp),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "People",
+              style: TextStyle(color: Colors.black, fontSize: 26.sp),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            SizedBox(
+              height: 800.h,
+              // width: 960.w,
+              child: GridView.count(
+                mainAxisSpacing: 20.h,
+                crossAxisCount: 2,
+                crossAxisSpacing: 20.w,
+                childAspectRatio: 2,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(25.w),
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(217, 217, 217, 1.0),
+                      borderRadius: BorderRadius.circular(30.r),
                     ),
-                    Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(Icons.people_alt_outlined,size: 40.sp,),
-                        SizedBox(width: 10.w,),
                         Text(
-                          "2596",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 32.sp
-                          ),
+                          "Students",
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 32.sp),
                         ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.people_alt_outlined,
+                              size: 40.sp,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "2596",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 50.w,
+                              height: 50.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.r),
+                                  color: Colors.white),
+                              child: Icon(
+                                Icons.bar_chart_rounded,
+                                size: 32.sp,
+                                color: const Color.fromRGBO(150, 101, 255, 1.0),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "11%",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                backgroundColor:
+                                    const Color.fromRGBO(142, 90, 252, 1.0),
+                                foregroundColor:
+                                    const Color.fromRGBO(255, 255, 255, 0.5),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50.w, vertical: 15.h)),
+                            onPressed: () {
+                              studentExcelProvider.selectExcelFile();
+                            },
+                            child: Text(
+                              "Upload New Students",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                    Row(
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(25.w),
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(217, 217, 217, 1.0),
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Container(
-                          width: 50.w,
-                          height: 50.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.r),
-                            color: Colors.white
-                          ),
-                          child: Icon(Icons.bar_chart_rounded,size: 32.sp,color:const Color.fromRGBO(150, 101, 255, 1.0),),
-                        ),
-                        SizedBox(width: 10.w,),
                         Text(
-                          "11%",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 32.sp
-                          ),
+                          "Teachers",
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 32.sp),
                         ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.people_alt_outlined,
+                              size: 40.sp,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "69",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 50.w,
+                              height: 50.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.r),
+                                  color: Colors.white),
+                              child: Icon(
+                                Icons.bar_chart_rounded,
+                                size: 32.sp,
+                                color: const Color.fromRGBO(150, 101, 255, 1.0),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "3%",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                backgroundColor:
+                                    const Color.fromRGBO(142, 90, 252, 1.0),
+                                foregroundColor:
+                                    const Color.fromRGBO(255, 255, 255, 0.5),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50.w, vertical: 15.h)),
+                            onPressed: () {
+                              teacherExcelProvider.selectExcelFile();
+                            },
+                            child: Text(
+                              "Upload New Teachers",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 32.sp),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                    SizedBox(height: 20.h,),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape:const StadiumBorder(),
-                          backgroundColor: const Color.fromRGBO(142, 90, 252, 1.0),
-                          foregroundColor:  const Color.fromRGBO(255, 255, 255, 0.5),
-                          padding: EdgeInsets.symmetric(horizontal: 50.w,vertical: 15.h)
-                        ),
-                        onPressed: (){
-                          studentExcelProvider.selectExcelFile();
-                        },
-                        child: Text(
-                          "Upload New Students",
-                          style: TextStyle(
-                              color:Colors.black,
-                              fontSize: 32.sp
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-
-        );
-      }
-    );
+            )
+          ],
+        ),
+      );
+    });
   }
 }
