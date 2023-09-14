@@ -45,7 +45,7 @@ class StudentExcelProvider with ChangeNotifier
         AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");
       }
     } else {
-      AppRouter.showErrorSnackBar("Failed", "Excel Sheet File was not picked!");
+      AppRouter.showErrorSnackBar("Info", "Excel Sheet File was not picked!");
     }
     notifyListeners();
   }
@@ -62,20 +62,30 @@ class StudentExcelProvider with ChangeNotifier
     return ''; // Unknown or unsupported file type
   }
 
-  readExcelFile() async
+  readExcelFile()
   {
     try{
       var bytes = excelFile!.bytes;
       var decodedExcel = Excel.decodeBytes(bytes!);
 
       for (var table in decodedExcel.tables.keys) {
-        debugPrint(table); //sheet Name
-        debugPrint(decodedExcel.tables[table]!.maxCols.toString());
-        debugPrint(decodedExcel.tables[table]!.maxRows.toString());
 
-        for(int i = 1; i < decodedExcel.tables[table]!.maxRows; i++)
+        int maxRows = decodedExcel.tables[table]!.maxRows;
+        if(maxRows <= 0)
+        {
+          AppRouter.showErrorSnackBar("Info", "The excel file is empty.");
+          break;
+        }
+
+        for(int i = 0; i < maxRows; i++)
         {
           var row = decodedExcel.tables[table]!.rows[i];
+
+          if(i == 0 && row[0]!.value.toString() != 'userID')
+          {
+            AppRouter.showErrorSnackBar("Failed", "Excel files has invalid pattern.");
+            break;
+          }
 
           currentExcelMap['userID'] = row[0]!.value.toString();
           currentExcelMap['name'] = row[1]!.value.toString();
@@ -102,7 +112,6 @@ class StudentExcelProvider with ChangeNotifier
       notifyListeners();
     }catch (error) {
       AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");
-      log(error.toString());
     }
 
   }
