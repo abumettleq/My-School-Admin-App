@@ -23,8 +23,8 @@ class DashboardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 1220.w,
-      height: 925.h,
+      width: 1290.w,
+      height: 950.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: Colors.white,

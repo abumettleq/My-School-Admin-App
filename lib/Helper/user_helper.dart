@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 
 class UserHelper{
@@ -28,6 +27,36 @@ class UserHelper{
 
     return UserModel.fromMap(dataMap);
   }
+
+
+  final List<DocumentSnapshot> teacherDocuments = [];
+  final List<DocumentSnapshot> studentDocuments = [];
+
+  Future<void> categorizeDocuments() async {
+    try {
+      final QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection('users').get();
+
+
+
+      for (var doc in querySnapshot.docs) {
+        final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        final String type = data['type'] ;
+
+        if (type == '1') {
+          teacherDocuments.add(doc);
+        } else if (type == '2') {
+          studentDocuments.add(doc);
+        }
+      }
+
+      log('Type 1 documents: ${teacherDocuments.length}');
+      log('Type 2 documents: ${studentDocuments.length}');
+    } catch (e) {
+      log('Error getting and categorizing documents: $e');
+    }
+  }
+
 
 
   // Future<UserProfileModel> getUserProfile()async{

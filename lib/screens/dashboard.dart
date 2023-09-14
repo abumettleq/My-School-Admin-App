@@ -149,11 +149,12 @@ class _DashboardState extends State<Dashboard> {
                   child: Row(
                     children: [
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             padding: EdgeInsets.all(10.sp),
-                            width: 350.w,
-                            height: 670.h,
+                            width: 280.w,
+                            height: 450.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16.r),
@@ -168,7 +169,7 @@ class _DashboardState extends State<Dashboard> {
                                             : Colors.white,
                                         foregroundColor: Colors.blue,
                                         padding: EdgeInsets.symmetric(
-                                            vertical: 30.h, horizontal: 10.w),
+                                            vertical: 20.h, horizontal: 10.w),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(12.r))),
@@ -185,7 +186,7 @@ class _DashboardState extends State<Dashboard> {
                                           color: selectedIdx == index
                                               ? Colors.blue
                                               : Colors.grey,
-                                          size: 30.sp,
+                                          size: 24.sp,
                                         ),
                                         SizedBox(
                                           width: 20.w,
@@ -196,7 +197,7 @@ class _DashboardState extends State<Dashboard> {
                                               color: selectedIdx == index
                                                   ? Colors.blue
                                                   : Colors.black,
-                                              fontSize: 20.sp,
+                                              fontSize: 15.sp,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -205,35 +206,27 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           const Spacer(),
+
                           Container(
-                            padding: EdgeInsets.all(10.sp),
-                            width: 350.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16.r),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "School Dashboard",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 20.sp),
+                            width: 280.w,
+                            alignment: Alignment.topLeft,
+                            child: SizedBox(
+                              width: 50.w,
+                              height: 50.w,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor:  const Color(0xffffabdc),
+                                  shape:const StadiumBorder(),
+                                  fixedSize: Size(40.w, 50.w),
+                                  alignment: Alignment.center,
+                                  padding:const EdgeInsets.all(0),
                                 ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "Version 1.0.0",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.grey,
-                                      fontSize: 17.sp),
-                                )
-                              ],
+                                onPressed: (){},
+                                child: Icon(Icons.logout_rounded,size: 24.sp,color: Colors.black,)
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       SizedBox(

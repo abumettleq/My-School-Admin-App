@@ -9,6 +9,10 @@ import 'package:my_school_admin_app/screens/dashboard.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class UserProvider with ChangeNotifier {
+  UserProvider(){
+    categorizeDocuments();
+    notifyListeners();
+  }
 
   GlobalKey<FormState> loginKey = GlobalKey();
   TextEditingController userIDController = TextEditingController();
@@ -77,6 +81,17 @@ class UserProvider with ChangeNotifier {
           "No Internet", "Failed to connect to the server");
       }
     }
+
+    int teachersNumber = 0;
+    int studentsNumber = 0;
+    int totalUsers = 0;
+  categorizeDocuments()async{
+    await UserHelper.userHelper.categorizeDocuments();
+    studentsNumber = UserHelper.userHelper.studentDocuments.length;
+    teachersNumber = UserHelper.userHelper.teacherDocuments.length;
+    totalUsers = studentsNumber + teachersNumber;
+    notifyListeners();
+  }
 
   }
 
