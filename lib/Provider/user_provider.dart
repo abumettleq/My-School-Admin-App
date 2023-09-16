@@ -73,7 +73,7 @@ class UserProvider with ChangeNotifier {
 
       }else {
         btnController.reset();
-        log('Failed to login, server is down.');
+        AppRouter.showErrorSnackBar("Login failed", "Please try again later");
       }
     }else{
       btnController.reset();

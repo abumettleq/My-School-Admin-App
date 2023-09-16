@@ -1,90 +1,100 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_school_admin_app/Provider/reports_provider.dart';
+import 'package:provider/provider.dart';
 
 class ReportsWidget extends StatelessWidget {
   const ReportsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1290.w,
-      height: 950.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        color: Colors.white,
-      ),
-      child: ListView.builder(
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index){
-          return Container(
-            width: 1200.w,
-            height: 210.h,
-            margin: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
-            padding: EdgeInsets.all(10.w),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.r),
-              color: const Color.fromRGBO(217, 217, 217, 1.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Alaa Mettleq",
-                  style: TextStyle(
-                    fontSize: 17.sp,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
+    return Consumer<ReportsProvider>(
+      builder: (context,reportsProvider,child) {  
+        return Container(
+          width: 1290.w,
+          height: 950.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.r),
+            color: Colors.white,
+          ),
+          child: ListView.builder(
+            itemCount: reportsProvider.reports?.length ?? 0,
+            itemBuilder: (BuildContext context, int index){
+              final report = reportsProvider.reports![index];
+              debugPrint(report['data']['timestamp'].toString());
+              return Container(
+                width: 1200.w,
+                height: 210.h,
+                margin: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.r),
+                  color: const Color.fromRGBO(217, 217, 217, 1.0),
                 ),
-                Text(
-                  "123456789",
-                  style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                SizedBox(
-                  width: 1280.w,
-                  height: 90.h,
-                  child: Text(
-                    "Hello World " * 60 ,
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.fade,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "mettleq@gmail.com",
+                      report['data']['fullName'],
                       style: TextStyle(
-                          fontSize: 15.sp,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold
+                        fontSize: 17.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
                       ),
                     ),
                     Text(
-                      "Sep 1, 2023",
+                      report['data']['sidOrMobile'],
                       style: TextStyle(
                           fontSize: 15.sp,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 94, 166, 254),
                           fontWeight: FontWeight.bold
                       ),
                     ),
+                    SizedBox(
+                      width: 1280.w,
+                      height: 90.h,
+                      child: Text(
+                        report['data']['comment'],
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          report['data']['emailAddress'],
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        Text(
+                          reportsProvider.convertTimestampToString(report['data']['timestamp']),
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          );
-        }
-      ),
+                ),
+              );
+            }
+          ),
 
+        );
+      }
     );
   }
 }
