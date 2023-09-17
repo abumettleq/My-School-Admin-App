@@ -4,7 +4,7 @@ import 'package:my_school_admin_app/Provider/reports_provider.dart';
 import 'package:provider/provider.dart';
 
 class ReportsWidget extends StatelessWidget {
- const ReportsWidget({super.key});
+  const ReportsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ReportsWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 width: 1200.w,
-                height: 210.h,
+                //height: 210.h,
                 margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
@@ -32,21 +32,35 @@ class ReportsWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      reportsProvider.reports![index].fullName!,
-                      style: TextStyle(
-                          fontSize: 17.sp,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Text(
+                          reportsProvider.reports![index].fullName!,
+                          style: TextStyle(
+                              fontSize: 17.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.delete_outline_rounded,
+                              size: 24.sp,
+                              color: const Color.fromRGBO(147, 0, 0, 1.0),
+                            ))
+                      ],
                     ),
                     Text(
                       reportsProvider.reports![index].sidOrMobile!,
                       style: TextStyle(
                           fontSize: 15.sp,
-                          color: Color.fromARGB(255, 94, 166, 254),
+                          color: const Color.fromARGB(255, 94, 166, 254),
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10.h,),
+                    SizedBox(
+                      height: 10.h,
+                    ),
                     SizedBox(
                       width: 1280.w,
                       //height: 90.h,
