@@ -7,7 +7,7 @@ import 'package:my_school_admin_app/Model/reports_model.dart';
 class ReportsProvider with ChangeNotifier
 {
   ReportsHelper? reportsHelperHere = ReportsHelper.reportsHelper;
-  List<ReportsModel>? reports;
+  List<ReportsModel> reports = [];
 
   ReportsProvider()
   {
@@ -22,21 +22,21 @@ class ReportsProvider with ChangeNotifier
   }
 
   String convertTimestampToString(Timestamp timestamp) {
-    // Assuming you have a Firestore Timestamp object
 
-    // Convert the Firestore Timestamp to a DateTime
     DateTime dateTime = timestamp.toDate();
 
-    // Define a format pattern (e.g., "yyyy-MM-dd HH:mm:ss")
     String formatPattern = "yyyy-MM-dd HH:mm:ss";
 
-    // Create a DateFormat object with the desired format pattern
     DateFormat dateFormat = DateFormat(formatPattern);
 
-    // Format the DateTime as a string
     String formattedString = dateFormat.format(dateTime);
 
     return formattedString;
+  }
+
+  clearReports(){
+    reports.clear();
+    notifyListeners();
   }
 
   deleteReport(String id) async{
