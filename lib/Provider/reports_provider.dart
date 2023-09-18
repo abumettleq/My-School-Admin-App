@@ -4,16 +4,19 @@ import 'package:my_school_admin_app/Helper/reports_helper.dart';
 import 'package:intl/intl.dart';
 import 'package:my_school_admin_app/Model/reports_model.dart';
 
-class ReportsProvider with ChangeNotifier {
+class ReportsProvider with ChangeNotifier
+{
   ReportsHelper? reportsHelperHere = ReportsHelper.reportsHelper;
   List<ReportsModel>? reports;
 
-  ReportsProvider() {
+  ReportsProvider()
+  {
     getReportsFromHelper();
     notifyListeners();
   }
 
-  getReportsFromHelper() async {
+  getReportsFromHelper() async
+  {
     reports = await reportsHelperHere!.getAllReports();
     notifyListeners();
   }

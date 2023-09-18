@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
+import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/Widgets/adminstration_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/calendar_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/help_widget.dart';
@@ -9,6 +10,7 @@ import 'package:my_school_admin_app/screens/Widgets/projects_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/reports_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/timesheet_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/training_widget.dart';
+import 'package:my_school_admin_app/screens/login.dart';
 import 'package:provider/provider.dart';
 
 import 'Widgets/dashboard_widget.dart';
@@ -222,7 +224,9 @@ class _DashboardState extends State<Dashboard> {
                                   alignment: Alignment.center,
                                   padding:const EdgeInsets.all(0),
                                 ),
-                                onPressed: (){},
+                                onPressed: (){
+                                  AppRouter.pushWithReplacementToWidget(const LoginPage());
+                                },
                                 child: Icon(Icons.logout_rounded,size: 24.sp,color: Colors.black,)
                               ),
                             ),
