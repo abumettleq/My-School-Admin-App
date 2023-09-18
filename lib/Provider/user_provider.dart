@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:my_school_admin_app/Helper/user_helper.dart';
+import 'package:my_school_admin_app/Model/admin_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/dashboard.dart';
@@ -90,6 +91,14 @@ class UserProvider with ChangeNotifier {
     studentsNumber = UserHelper.userHelper.studentDocuments.length;
     teachersNumber = UserHelper.userHelper.teacherDocuments.length;
     totalUsers = studentsNumber + teachersNumber;
+    notifyListeners();
+  }
+
+  List<AdminModel> adminDetails = [];
+
+  getAdminProfile()async{
+    adminDetails = await UserHelper.userHelper.getAdminProfile(userIDController.text);
+    log(adminDetails.toString());
     notifyListeners();
   }
 

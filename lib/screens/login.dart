@@ -167,7 +167,10 @@ class LoginPage extends StatelessWidget {
                                   height: 72.h,
                                   width: 340.w,
                                   controller: userProvider.btnController,
-                                  onPressed: (){userProvider.login();},
+                                  onPressed: (){
+                                    userProvider.login();
+                                    userProvider.getAdminProfile();
+                                  },
                                   child: Text(
                                     "LOGIN",
                                     style: TextStyle(

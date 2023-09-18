@@ -33,15 +33,19 @@ class _DashboardState extends State<Dashboard> {
     4: [Icons.live_tv_rounded, "Training", const TrainingWidget()],
     5: [Icons.access_time_rounded, "Timesheet", const TimesheetWidget()],
     6: [Icons.messenger_rounded, "Reports", const ReportsWidget()],
-    7: [
-      Icons.home_work_rounded,
-      "Administration",
-      const AdministrationWidget()
-    ],
+    7: [Icons.home_work_rounded, "Administration", const AdministrationWidget()],
     8: [Icons.help_outline_rounded, "Help", const HelpWidget()]
   };
 
   Widget currentWidget = const DashboardWidget();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // UserProvider userProvider = UserProvider();
+    // userProvider.getAdminProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,29 +67,13 @@ class _DashboardState extends State<Dashboard> {
                           bottomLeft: Radius.circular(16.r))),
                   child: Row(
                     children: [
-                      InkWell(
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                            "assets/avatar.png", // Replace with your image path
-                            width: 50.0.w,
-                            height: 50.0.w,
-                            fit: BoxFit.cover,
-                          ),
-                          if(userProvider.canShowContainer)
-                                  Container(
-                                    color: Colors.red,
-                                    margin: EdgeInsets.only(top: 50.h),
-                                    child:
-                                    const Text("dsad"),
-                                  )
-
-                        ]
-                    ),
-                        onTap: (){
-                            userProvider.toggleContainer();
-
-                        },
+                      SizedBox(
+                        width: 50.w,
+                        height: 50.w,
+                        child: CircleAvatar(
+                          radius: 50.r,
+                          backgroundImage: NetworkImage(userProvider.adminDetails[0].imageUrl ?? "assets/avatar.png",),
+                        ),
                       ),
                       SizedBox(
                         width: 10.w,
@@ -93,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
                       SizedBox(
                         width: 200.w,
                         child: Text(
-                          "Abu Mettleq",
+                           userProvider.adminDetails[0].name ?? '',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.sp,

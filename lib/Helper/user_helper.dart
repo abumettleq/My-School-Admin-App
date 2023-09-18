@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_school_admin_app/Model/admin_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 
 class UserHelper{
@@ -55,6 +56,19 @@ class UserHelper{
     } catch (e) {
       log('Error getting and categorizing documents: $e');
     }
+  }
+
+  Future<List<AdminModel>> getAdminProfile(String id)async{
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await userCollection.doc(id).collection("details").get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = querySnapshot.docs;
+
+    List<AdminModel> adminDetails = documents.map((e) {
+      log(e.data()['name'].toString());
+      AdminModel adminModel = AdminModel.fromMap(e.data());
+      return adminModel;
+    }).toList();
+
+    return adminDetails;
   }
 
 

@@ -17,7 +17,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
   @override
   void initState() {
     super.initState();
-    Future.delayed( const Duration(seconds: 5),(){
+    Future.delayed( const Duration(seconds: 2),(){
       ReportsProvider reportsProvider = ReportsProvider();
       if(reportsProvider.reports.isEmpty){
         setState(() {
@@ -66,8 +66,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                       reportsProvider.clearReports();
                     });
                     loadingWidget = const Center(child: CircularProgressIndicator(color: Colors.grey,),);
-                    // Wait for 5 seconds
-                    //await Future.delayed(const Duration(seconds: 5));
+
                     await reportsProvider.getReportsFromHelper();
                     loadingWidget = Center(
                       child: Text(
