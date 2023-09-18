@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_admin_app/Model/reports_model.dart';
+import 'package:my_school_admin_app/Router/app_router.dart';
 
 class ReportsHelper {
   ReportsHelper._();
@@ -24,6 +25,16 @@ class ReportsHelper {
     } catch (e) {
       debugPrint('Error getting reports: $e');
       rethrow;
+    }
+  }
+
+  Future<void> deleteItem(String documentId) async {
+    try {
+      await FirebaseFirestore.instance.collection('reports').doc(documentId).delete();
+      AppRouter.showSnackBar("Deleted", "report deleted successfully.");
+    } catch (e) {
+      AppRouter.showErrorSnackBar("Failed", "Error deleting item, try again!");
+
     }
   }
 }

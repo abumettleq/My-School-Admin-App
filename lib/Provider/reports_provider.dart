@@ -35,4 +35,11 @@ class ReportsProvider with ChangeNotifier {
 
     return formattedString;
   }
+
+  deleteReport(String id) async{
+    await reportsHelperHere!.deleteItem(id);
+    getReportsFromHelper();
+    notifyListeners();
+  }
+
 }

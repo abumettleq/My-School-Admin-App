@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/reports_provider.dart';
+import 'package:my_school_admin_app/screens/Widgets/confirm_widget.dart';
 import 'package:provider/provider.dart';
 
 class ReportsWidget extends StatelessWidget {
@@ -43,7 +44,11 @@ class ReportsWidget extends StatelessWidget {
                         ),
                         const Spacer(),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(context: context, builder: (context){
+                                return ConfirmWidget(reportId: reportsProvider.reports![index].id!,);
+                              });
+                            },
                             icon: Icon(
                               Icons.delete_outline_rounded,
                               size: 24.sp,
