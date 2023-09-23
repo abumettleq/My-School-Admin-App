@@ -11,7 +11,7 @@ class TeacherExcelHelper
   Future<void> createNewUser(TeacherExcelFile teacherExcelFile) async {
     docReference = FirebaseFirestore.instance
         .collection('users')
-        .doc(teacherExcelFile.userID)
+        .doc(teacherExcelFile.teacherID)
         .collection("itemMenu")
         .doc("profile");
 
@@ -19,9 +19,9 @@ class TeacherExcelHelper
 
     docReference = FirebaseFirestore.instance
         .collection('users')
-        .doc(teacherExcelFile.userID);
+        .doc(teacherExcelFile.teacherID);
 
-    await docReference!.set({'password': 'A${teacherExcelFile.userID}a', 'type':'1'});
+    await docReference!.set({'password': 'A${teacherExcelFile.teacherID}a', 'type':'1'});
   }
 
 

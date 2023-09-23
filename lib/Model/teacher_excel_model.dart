@@ -1,68 +1,64 @@
 class TeacherExcelFile
 {
-  String? userID;
-  String? studentName;
-  String? fatherName;
-  String? motherName;
-  String? gender;
-  String? birthday;
-  String? bloodGroup;
-  String? address;
-  String? phoneNumber;
-  String? email;
-  String? currentAY;
-  String? currentClass;
-  String? image;
+  String? teacherID,
+          nID,
+          fullName,
+          gender,
+          birthdate,
+          phoneNumber,
+          email,
+          dateOfHire,
+          employmentStatus,
+          jobTitle,
+          degreeHeld,
+          salary;
 
   TeacherExcelFile({
-    required this.address,
-    required this.image,
-    required this.studentName,
-    required this.birthday,
-    required this.bloodGroup,
-    required this.currentAY,
-    required this.currentClass,
-    required this.fatherName,
-    required this.gender,
-    required this.motherName,
-    required this.phoneNumber,
+    required this.birthdate,
+    required this.dateOfHire,
+    required this.degreeHeld,
     required this.email,
-    required this.userID
+    required this.employmentStatus,
+    required this.fullName,
+    required this.gender,
+    required this.jobTitle,
+    required this.nID,
+    required this.phoneNumber,
+    required this.salary,
+    required this.teacherID
   });
 
   factory TeacherExcelFile.fromMap(Map<String,dynamic> map){
     return TeacherExcelFile(
-        userID: map['userID'],
-        email: map['email'],
-        address: map['address'],
-        image: map['image'],
-        studentName: map['name'],
-        birthday: map['birthday'],
-        bloodGroup: map['blood_group'],
-        currentAY: map['current_AY'],
-        currentClass: map['current_class'],
-        fatherName: map['father_name'],
+        teacherID: map['teacherID'],
+        nID: map['nID'],
+        fullName: map['full_name'],
         gender: map['gender'],
-        motherName: map['mother_name'],
-        phoneNumber: map['phone_number']
+        birthdate: map['birthdate'],
+        phoneNumber: map['phone_number'],
+        email: map['email'],
+        dateOfHire: map['date_of_hire'],
+        employmentStatus: map['employment_status'],
+        jobTitle: map['job_title'],
+        degreeHeld: map['degree_held'],
+        salary: map['salary']
     );
   }
 
   Map<String, dynamic> toMap(){
     return {
-      'name': studentName,
-      'address': address,
-      'image': image,
-      'birthday': birthday,
-      'bloodGroup': bloodGroup,
-      'current_AY': currentAY,
-      'current_class': currentClass,
-      'father_name': fatherName,
+      'teacherID': teacherID,
+      'nId': nID,
+      'full_name': fullName,
       'gender': gender,
-      'mother_name': motherName,
+      'birthdate': birthdate,
       'phone_number': phoneNumber,
       'email': email,
-      'userID': userID
+      'date_of_hire': dateOfHire,
+      'employment_status': employmentStatus,
+      'job_title': jobTitle,
+      'degree_held': degreeHeld,
+      'salary': salary
     };
   }
 }

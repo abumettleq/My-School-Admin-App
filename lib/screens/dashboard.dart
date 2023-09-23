@@ -28,10 +28,10 @@ class _DashboardState extends State<Dashboard> {
   Map<int, dynamic> items = {
     0: [Icons.dashboard, "Dashboard", const DashboardWidget()],
     1: [Icons.people, "People", const PeopleWidget()],
-    2: [Icons.paste_rounded, "Projects", const ProjectsWidget()],
+    2: [Icons.paste_rounded, "Attendance", const ProjectsWidget()],
     3: [Icons.calendar_today_rounded, "Calender", const CalendarWidget()],
-    4: [Icons.live_tv_rounded, "Training", const TrainingWidget()],
-    5: [Icons.access_time_rounded, "Timesheet", const TimesheetWidget()],
+    4: [Icons.live_tv_rounded, "CCTV", const TrainingWidget()],
+    5: [Icons.access_time_rounded, "Routine", const TimesheetWidget()],
     6: [Icons.messenger_rounded, "Reports", const ReportsWidget()],
     7: [Icons.home_work_rounded, "Administration", const AdministrationWidget()],
     8: [Icons.help_outline_rounded, "Help", const HelpWidget()]
@@ -100,7 +100,9 @@ class _DashboardState extends State<Dashboard> {
                               Icons.notifications,
                               color: Colors.blue,
                               size: 24.sp,
+                              
                             ),
+                      
                             prefixIcon: Icon(
                               Icons.search,
                               size: 24.sp,

@@ -67,27 +67,40 @@ class TeacherExcelProvider with ChangeNotifier
       var decodedExcel = Excel.decodeBytes(bytes!);
 
       for (var table in decodedExcel.tables.keys) {
-        debugPrint(table); //sheet Name
-        debugPrint(decodedExcel.tables[table]!.maxCols.toString());
-        debugPrint(decodedExcel.tables[table]!.maxRows.toString());
 
-        for(int i = 1; i < decodedExcel.tables[table]!.maxRows; i++)
+        int maxRows = decodedExcel.tables[table]!.maxRows;
+        if(maxRows <= 0)
+        {
+          AppRouter.showErrorSnackBar("Info", "The excel file was empty.");
+          break;
+        }
+
+        for(int i = 0; i < maxRows; i++)
         {
           var row = decodedExcel.tables[table]!.rows[i];
 
-          currentExcelMap['userID'] = row[0]!.value.toString();
-          currentExcelMap['name'] = row[1]!.value.toString();
-          currentExcelMap['father_name'] = row[2]!.value.toString();
-          currentExcelMap['mother_name'] = row[3]!.value.toString();
-          currentExcelMap['gender'] = row[4]!.value.toString();
-          currentExcelMap['birthday'] = row[5]!.value.toString();
-          currentExcelMap['blood_group'] = row[6]!.value.toString();
-          currentExcelMap['address'] = row[7]!.value.toString();
-          currentExcelMap['phone_number'] = row[8]!.value.toString();
-          currentExcelMap['current_class'] = row[9]!.value.toString();
-          currentExcelMap['email'] = row[10]!.value.toString();
-          currentExcelMap['current_AY'] = row[11]!.value.toString();
-          currentExcelMap['image'] = row[12]!.value.toString();
+          // is the file following the pattern required?
+          if(i == 0 && row[0]!.value.toString() != 'userID') // No? then terminate reading process.
+          {
+            AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
+            break;
+          }
+          else if(i == 0) { // Yes? then skip to next row.
+            continue;
+          }
+
+          currentExcelMap['teacherID'] = row[0]!.value.toString();
+          currentExcelMap['nID'] = row[1]!.value.toString();
+          currentExcelMap['full_name'] = row[2]!.value.toString();
+          currentExcelMap['gender'] = row[3]!.value.toString();
+          currentExcelMap['birthdate'] = row[4]!.value.toString();
+          currentExcelMap['phone_number'] = row[5]!.value.toString();
+          currentExcelMap['email'] = row[6]!.value.toString();
+          currentExcelMap['date_of_hire'] = row[7]!.value.toString();
+          currentExcelMap['employment_status'] = row[8]!.value.toString();
+          currentExcelMap['job_title'] = row[9]!.value.toString();
+          currentExcelMap['degree_held'] = row[10]!.value.toString();
+          currentExcelMap['salary'] = row[11]!.value.toString();
 
           teacherExcelFile = TeacherExcelFile.fromMap(currentExcelMap);
           teacherExcelHelperHere.createNewUser(teacherExcelFile!);
@@ -100,8 +113,6 @@ class TeacherExcelProvider with ChangeNotifier
       notifyListeners();
     }catch (error) {
       AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");
-      log(error.toString());
     }
-
   }
 }

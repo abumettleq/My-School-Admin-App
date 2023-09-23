@@ -73,7 +73,7 @@ class StudentExcelProvider with ChangeNotifier
         int maxRows = decodedExcel.tables[table]!.maxRows;
         if(maxRows <= 0)
         {
-          AppRouter.showErrorSnackBar("Info", "The excel file is empty.");
+          AppRouter.showErrorSnackBar("Info", "The excel file was empty.");
           break;
         }
 
@@ -81,10 +81,14 @@ class StudentExcelProvider with ChangeNotifier
         {
           var row = decodedExcel.tables[table]!.rows[i];
 
-          if(i == 0 && row[0]!.value.toString() != 'userID')
+          // is the file following the pattern required?
+          if(i == 0 && row[0]!.value.toString() != 'userID') // No? then terminate reading process.
           {
-            AppRouter.showErrorSnackBar("Failed", "Excel files has invalid pattern.");
+            AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
             break;
+          }
+          else if(i == 0) { // Yes? then skip to next row.
+            continue;
           }
 
           currentExcelMap['userID'] = row[0]!.value.toString();
@@ -113,6 +117,5 @@ class StudentExcelProvider with ChangeNotifier
     }catch (error) {
       AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");
     }
-
   }
 }
