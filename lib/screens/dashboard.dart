@@ -7,7 +7,7 @@ import 'package:my_school_admin_app/screens/Widgets/calendar_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/help_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/people_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/projects_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/reports_widget.dart';
+import 'package:my_school_admin_app/screens/Widgets/feedbacks_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/timesheet_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/training_widget.dart';
 import 'package:my_school_admin_app/screens/login.dart';
@@ -32,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
     3: [Icons.calendar_today_rounded, "Calender", const CalendarWidget()],
     4: [Icons.live_tv_rounded, "Training", const TrainingWidget()],
     5: [Icons.access_time_rounded, "Timesheet", const TimesheetWidget()],
-    6: [Icons.messenger_rounded, "Reports", const ReportsWidget()],
+    6: [Icons.messenger_rounded, "Feedbacks", const FeedbacksWidget()],
     7: [Icons.home_work_rounded, "Administration", const AdministrationWidget()],
     8: [Icons.help_outline_rounded, "Help", const HelpWidget()]
   };

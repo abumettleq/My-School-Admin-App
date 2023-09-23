@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-class ReportsModel
+class FeedbacksModel
 {
   String? id;
   String? comment;
@@ -10,7 +10,7 @@ class ReportsModel
   String? sidOrMobile;
   String? timestamp;
 
-  ReportsModel(
+  FeedbacksModel(
     {
       this.id,
       this.comment,
@@ -21,7 +21,7 @@ class ReportsModel
     }
   );
 
-  ReportsModel.fromMap(Map<String,dynamic> map, String documentId){
+  FeedbacksModel.fromMap(Map<String,dynamic> map, String documentId){
     id = documentId;
     comment =  map['comment'];
     emailAddress = map['emailAddress'];

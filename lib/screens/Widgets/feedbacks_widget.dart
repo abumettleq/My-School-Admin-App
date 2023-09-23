@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_school_admin_app/Provider/reports_provider.dart';
+import 'package:my_school_admin_app/Provider/feedbacks_provider.dart';
 import 'package:my_school_admin_app/screens/Widgets/confirm_widget.dart';
 import 'package:provider/provider.dart';
 
-class ReportsWidget extends StatefulWidget {
-  const ReportsWidget({super.key});
+class FeedbacksWidget extends StatefulWidget {
+  const FeedbacksWidget({super.key});
 
   @override
-  State<ReportsWidget> createState() => _ReportsWidgetState();
+  State<FeedbacksWidget> createState() => _FeedbacksWidgetState();
 }
 
-class _ReportsWidgetState extends State<ReportsWidget> {
+class _FeedbacksWidgetState extends State<FeedbacksWidget> {
   Widget loadingWidget = const Center(child: CircularProgressIndicator(color: Colors.grey,),);
 
   @override
   void initState() {
     super.initState();
     Future.delayed( const Duration(seconds: 2),(){
-      ReportsProvider reportsProvider = ReportsProvider();
-      if(reportsProvider.reports.isEmpty){
+      FeedbacksProvider feedbacksProvider = FeedbacksProvider();
+      if(feedbacksProvider.feedbacks.isEmpty){
         setState(() {
           loadingWidget = Center(
             child: Text(
-              "No Reports Found!",
+              "No Feedbacks Found!",
               style: TextStyle(
                   fontSize: 17.sp,
                   color: Colors.black,
@@ -38,8 +38,8 @@ class _ReportsWidgetState extends State<ReportsWidget> {
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<ReportsProvider>(
-        builder: (context, reportsProvider, child) {
+    return Consumer<FeedbacksProvider>(
+        builder: (context, feedbacksProvider, child) {
       return Container(
         width: 1290.w,
         height: 950.h,
@@ -55,7 +55,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Reports",
+                  "Feedbacks",
                   style: TextStyle(color: Colors.black, fontSize: 24.sp),
                 ),
                 // this is refresh icon button
@@ -63,14 +63,14 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                   onPressed: () async {
                     // Show the CircularProgressIndicator
                     setState(() {
-                      reportsProvider.clearReports();
+                      feedbacksProvider.clearFeedbacks();
                     });
                     loadingWidget = const Center(child: CircularProgressIndicator(color: Colors.grey,),);
 
-                    await reportsProvider.getReportsFromHelper();
+                    await feedbacksProvider.getFeedbacksFromHelper();
                     loadingWidget = Center(
                       child: Text(
-                        "No Reports Found!",
+                        "No Feedbacks Found!",
                         style: TextStyle(
                             fontSize: 17.sp,
                             color: Colors.black,
@@ -92,13 +92,13 @@ class _ReportsWidgetState extends State<ReportsWidget> {
               height: 10.h,
             ),
             const Spacer(),
-            reportsProvider.reports.isEmpty
+            feedbacksProvider.feedbacks.isEmpty
               ? loadingWidget
               : SizedBox(
                 height: 825.h,
                 width: 1290.w,
                 child: ListView.builder(
-                    itemCount: reportsProvider.reports.length,
+                    itemCount: feedbacksProvider.feedbacks.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         width: 1200.w,
@@ -115,7 +115,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                             Row(
                               children: [
                                 Text(
-                                  reportsProvider.reports[index].fullName!,
+                                  feedbacksProvider.feedbacks[index].fullName!,
                                   style: TextStyle(
                                       fontSize: 17.sp,
                                       color: Colors.black,
@@ -125,7 +125,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                                 IconButton(
                                     onPressed: () {
                                       showDialog(context: context, builder: (context){
-                                        return ConfirmWidget(reportId: reportsProvider.reports[index].id!,);
+                                        return ConfirmWidget(feedbackId: feedbacksProvider.feedbacks[index].id!,);
                                       });
                                     },
                                     icon: Icon(
@@ -136,7 +136,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                               ],
                             ),
                             Text(
-                              reportsProvider.reports[index].sidOrMobile!,
+                              feedbacksProvider.feedbacks[index].sidOrMobile!,
                               style: TextStyle(
                                   fontSize: 15.sp,
                                   color: const Color.fromARGB(255, 94, 166, 254),
@@ -149,7 +149,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                               width: 1280.w,
                               //height: 90.h,
                               child: Text(
-                                reportsProvider.reports[index].comment!,
+                                feedbacksProvider.feedbacks[index].comment!,
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   color: Colors.black,
@@ -165,14 +165,14 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  reportsProvider.reports[index].emailAddress!,
+                                  feedbacksProvider.feedbacks[index].emailAddress!,
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  reportsProvider.reports[index].timestamp!,
+                                  feedbacksProvider.feedbacks[index].timestamp!,
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       color: Colors.black,

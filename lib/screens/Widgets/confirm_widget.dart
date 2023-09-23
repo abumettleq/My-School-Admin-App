@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_school_admin_app/Provider/reports_provider.dart';
+import 'package:my_school_admin_app/Provider/feedbacks_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:provider/provider.dart';
 
 class ConfirmWidget extends StatelessWidget {
-  const ConfirmWidget({super.key,required this.reportId});
-  final String reportId;
+  const ConfirmWidget({super.key,required this.feedbackId});
+  final String feedbackId;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -58,15 +58,15 @@ class ConfirmWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Consumer<ReportsProvider>(
-                  builder: (context,reportsProvider,child) {
+                Consumer<FeedbacksProvider>(
+                  builder: (context,feedbacksProvider,child) {
                     return TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.pink,
                       ),
                       onPressed: (){
-                        reportsProvider.deleteReport(reportId);
+                        feedbacksProvider.deleteFeedback(feedbackId);
                         AppRouter.pop();
                       },
                       child: Text(
