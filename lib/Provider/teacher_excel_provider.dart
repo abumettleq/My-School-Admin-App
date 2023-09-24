@@ -80,7 +80,7 @@ class TeacherExcelProvider with ChangeNotifier
           var row = decodedExcel.tables[table]!.rows[i];
 
           // is the file following the pattern required?
-          if(i == 0 && row[0]!.value.toString() != 'userID') // No? then terminate reading process.
+          if(i == 0 && row[0]!.value.toString() != 'teacherID') // No? then terminate reading process.
           {
             AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
             break;
