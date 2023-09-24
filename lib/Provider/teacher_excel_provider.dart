@@ -89,18 +89,18 @@ class TeacherExcelProvider with ChangeNotifier
             continue;
           }
 
-          currentExcelMap['teacherID'] = row[0]!.value.toString();
-          currentExcelMap['nID'] = row[1]!.value.toString();
-          currentExcelMap['full_name'] = row[2]!.value.toString();
-          currentExcelMap['gender'] = row[3]!.value.toString();
-          currentExcelMap['birthdate'] = row[4]!.value.toString();
-          currentExcelMap['phone_number'] = row[5]!.value.toString();
-          currentExcelMap['email'] = row[6]!.value.toString();
-          currentExcelMap['date_of_hire'] = row[7]!.value.toString();
-          currentExcelMap['employment_status'] = row[8]!.value.toString();
-          currentExcelMap['job_title'] = row[9]!.value.toString();
-          currentExcelMap['degree_held'] = row[10]!.value.toString();
-          currentExcelMap['salary'] = row[11]!.value.toString();
+          currentExcelMap['teacherID'] = row[0]?.value.toString();
+          currentExcelMap['nID'] = row[1]?.value.toString();
+          currentExcelMap['full_name'] = row[2]?.value.toString();
+          currentExcelMap['gender'] = row[3]?.value.toString();
+          currentExcelMap['birthdate'] = row[4]?.value.toString();
+          currentExcelMap['phone_number'] = row[5]?.value.toString();
+          currentExcelMap['email'] = row[6]?.value.toString();
+          currentExcelMap['date_of_hire'] = row[7]?.value.toString();
+          currentExcelMap['employment_status'] = row[8]?.value.toString();
+          currentExcelMap['job_title'] = row[9]?.value.toString();
+          currentExcelMap['degree_held'] = row[10]?.value.toString();
+          currentExcelMap['salary'] = row[11]?.value.toString();
 
           teacherExcelFile = TeacherExcelFile.fromMap(currentExcelMap);
           teacherExcelHelperHere.createNewUser(teacherExcelFile!);

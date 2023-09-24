@@ -14,34 +14,34 @@ class TeacherExcelFile
           salary;
 
   TeacherExcelFile({
-    required this.birthdate,
-    required this.dateOfHire,
-    required this.degreeHeld,
-    required this.email,
-    required this.employmentStatus,
-    required this.fullName,
-    required this.gender,
-    required this.jobTitle,
-    required this.nID,
-    required this.phoneNumber,
-    required this.salary,
-    required this.teacherID
+    this.birthdate,
+    this.dateOfHire,
+    this.degreeHeld,
+    this.email,
+    this.employmentStatus,
+    this.fullName,
+    this.gender,
+    this.jobTitle,
+    this.nID,
+    this.phoneNumber,
+    this.salary,
+    this.teacherID
   });
 
   factory TeacherExcelFile.fromMap(Map<String,dynamic> map){
     return TeacherExcelFile(
-        teacherID: map['teacherID'],
-        nID: map['nID'],
-        fullName: map['full_name'],
-        gender: map['gender'],
-        birthdate: map['birthdate'],
-        phoneNumber: map['phone_number'],
-        email: map['email'],
-        dateOfHire: map['date_of_hire'],
-        employmentStatus: map['employment_status'],
-        jobTitle: map['job_title'],
-        degreeHeld: map['degree_held'],
-        salary: map['salary']
+        teacherID: map['teacherID'] ?? " ",
+        nID: map['nID'] ?? " ",
+        fullName: map['full_name'] ?? " ",
+        gender: map['gender'] ?? " ",
+        birthdate: map['birthdate'] ?? " ",
+        phoneNumber: map['phone_number'] ?? " ",
+        email: map['email'] ?? " ",
+        dateOfHire: map['date_of_hire'] ?? " ",
+        employmentStatus: map['employment_status'] ?? " ",
+        jobTitle: map['job_title'] ?? " ",
+        degreeHeld: map['degree_held'] ?? " ",
+        salary: map['salary'] ?? " "
     );
   }
 
