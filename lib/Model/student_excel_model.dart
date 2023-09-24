@@ -15,36 +15,36 @@ class StudentExcelFile
   String? image;
 
   StudentExcelFile({
-    required this.address,
-    required this.image,
-    required this.studentName,
-    required this.birthday,
-    required this.bloodGroup,
-    required this.currentAY,
-    required this.currentClass,
-    required this.fatherName,
-    required this.gender,
-    required this.motherName,
-    required this.phoneNumber,
-    required this.email,
-    required this.userID
+    this.address,
+    this.image,
+    this.studentName,
+    this.birthday,
+    this.bloodGroup,
+    this.currentAY,
+    this.currentClass,
+    this.fatherName,
+    this.gender,
+    this.motherName,
+    this.phoneNumber,
+    this.email,
+    this.userID
   });
 
   factory StudentExcelFile.fromMap(Map<String,dynamic> map){
     return StudentExcelFile(
-        userID: map['userID'],
-        email: map['email'],
-        address: map['address'],
-        image: map['image'],
-        studentName: map['name'],
-        birthday: map['birthday'],
-        bloodGroup: map['blood_group'],
-        currentAY: map['current_AY'],
-        currentClass: map['current_class'],
-        fatherName: map['father_name'],
-        gender: map['gender'],
-        motherName: map['mother_name'],
-        phoneNumber: map['phone_number']
+        userID: map['userID'] ?? " ",
+        email: map['email'] ?? " ",
+        address: map['address'] ?? " ",
+        image: map['image'] ?? " ",
+        studentName: map['name'] ?? " ",
+        birthday: map['birthday'] ?? " ",
+        bloodGroup: map['blood_group'] ?? " ",
+        currentAY: map['current_AY'] ?? " ",
+        currentClass: map['current_class'] ?? " ",
+        fatherName: map['father_name'] ?? " ",
+        gender: map['gender'] ?? " ",
+        motherName: map['mother_name'] ?? " ",
+        phoneNumber: map['phone_number'] ?? " "
     );
   }
 
