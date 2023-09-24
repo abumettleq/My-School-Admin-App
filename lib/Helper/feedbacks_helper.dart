@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_admin_app/Model/feedbacks_model.dart';
@@ -30,7 +32,7 @@ class FeedbackHelper {
 
   Future<void> deleteItem(String documentId) async {
     try {
-      await FirebaseFirestore.instance.collection('feedbacks').doc(documentId).delete();
+      await FirebaseFirestore.instance.collection('feedback').doc(documentId).delete();
       AppRouter.showSnackBar("Deleted", "feedback deleted successfully.");
     } catch (e) {
       AppRouter.showErrorSnackBar("Failed", "Error deleting item, try again!");
