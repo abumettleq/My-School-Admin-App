@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/student_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/teacher_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
+import 'package:my_school_admin_app/Router/app_router.dart';
+import 'package:my_school_admin_app/screens/Students/show_all_students.dart';
 import 'package:provider/provider.dart';
 
 class PeopleWidget extends StatelessWidget {
@@ -102,13 +104,13 @@ class PeopleWidget extends StatelessWidget {
                               alignment: Alignment.center,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    backgroundColor:
-                                    const Color.fromRGBO(142, 90, 252, 1.0),
-                                    foregroundColor:
-                                    const Color.fromRGBO(255, 255, 255, 0.5),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 50.w, vertical: 15.h)),
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
                                 onPressed: () {
                                   studentExcelProvider.selectExcelFile();
                                 },
@@ -187,18 +189,158 @@ class PeopleWidget extends StatelessWidget {
                               alignment: Alignment.center,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    backgroundColor:
-                                    const Color.fromRGBO(142, 90, 252, 1.0),
-                                    foregroundColor:
-                                    const Color.fromRGBO(255, 255, 255, 0.5),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 50.w, vertical: 15.h)),
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
                                 onPressed: () {
                                   teacherExcelProvider.selectExcelFile();
                                 },
                                 child: Text(
                                   "Upload New Teachers",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20.sp),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 50.h,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 450.w,
+                        height: 250.h,
+                        padding: EdgeInsets.all(25.w),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(217, 217, 217, 1.0),
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Student Utilities",
+                              style: TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
+                                onPressed: () async{
+                                  showDialog(context: context, builder: (context){
+                                    return const ShowAllStudents();
+                                  });
+                                  userProvider.clearStudentData();
+                                  await userProvider.getUsersData();
+                                },
+                                child: Text(
+                                  "Show All Students",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20.sp),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Notify a Student",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20.sp),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 50.w,),
+                      Container(
+                        width: 450.w,
+                        height: 250.h,
+                        padding: EdgeInsets.all(25.w),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(217, 217, 217, 1.0),
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Teacher Utilities",
+                              style:
+                              TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Show All Teachers",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20.sp),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(330.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Notify a Teacher",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.sp),
                                 ),

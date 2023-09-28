@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_school_admin_app/Model/admin_model.dart';
+import 'package:my_school_admin_app/Model/student_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 
 class UserHelper{
@@ -57,6 +58,41 @@ class UserHelper{
       log('Error getting and categorizing documents: $e');
     }
   }
+
+  final List<StudentModel> studentsData = [];
+
+  Future<void> getUsersData() async {
+    studentsData.clear();
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').get();
+
+      for (var doc in querySnapshot.docs) {
+        final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        final String type = data['type'];
+
+        if (type == '1') {
+
+        } else if (type == '2') {
+          final QuerySnapshot userProfileSnapshot = await doc.reference.collection('itemMenu').get();
+
+          for (var userProfileDoc in userProfileSnapshot.docs) {
+            final Map<String, dynamic> userProfileData = userProfileDoc.data() as Map<String, dynamic>;
+
+            final StudentModel student = StudentModel.fromMap(userProfileData);
+            studentsData.add(student);
+          }
+        }
+      }
+
+      //log('Type 1 documents: ${teacherDocuments.length}');
+      log('Student number is: ${studentsData.length}');
+    } catch (e) {
+      log('Error getting and categorizing documents: $e');
+    }
+  }
+
+
+
 
   Future<List<AdminModel>> getAdminProfile(String id)async{
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await userCollection.doc(id).collection("details").get();
