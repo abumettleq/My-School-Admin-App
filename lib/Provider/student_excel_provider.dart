@@ -97,9 +97,9 @@ class StudentExcelProvider with ChangeNotifier
           currentExcelMap['blood_group'] = row[6]?.value.toString();
           currentExcelMap['address'] = row[7]?.value.toString();
           currentExcelMap['phone_number'] = row[8]?.value.toString();
-          currentExcelMap['current_class'] = row[9]?.value.toString();
-          currentExcelMap['email'] = row[10]?.value.toString();
-          currentExcelMap['current_AY'] = row[11]?.value.toString();
+          currentExcelMap['email'] = row[9]?.value.toString();
+          currentExcelMap['current_AY'] = row[10]?.value.toString();
+          currentExcelMap['current_class'] = row[11]?.value.toString();
           currentExcelMap['image'] = row[12]?.value.toString();
 
           studentExcelFile = StudentExcelFile.fromMap(currentExcelMap);
