@@ -5,6 +5,7 @@ import 'package:my_school_admin_app/Provider/teacher_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/Students/show_all_students.dart';
+import 'package:my_school_admin_app/screens/Teacher/show_all_teacher.dart';
 import 'package:provider/provider.dart';
 
 class PeopleWidget extends StatelessWidget {
@@ -250,7 +251,7 @@ class PeopleWidget extends StatelessWidget {
                                     return const ShowAllStudents();
                                   });
                                   userProvider.clearStudentData();
-                                  await userProvider.getUsersData();
+                                  await userProvider.getStudentData();
                                 },
                                 child: Text(
                                   "Show All Students",
@@ -315,8 +316,12 @@ class PeopleWidget extends StatelessWidget {
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(330.w,40.h),
                                 ),
-                                onPressed: () {
-
+                                onPressed: () async{
+                                  showDialog(context: context, builder: (context){
+                                    return const ShowAllTeacher();
+                                  });
+                                  userProvider.clearTeacherData();
+                                  await userProvider.getTeacherData();
                                 },
                                 child: Text(
                                   "Show All Teachers",

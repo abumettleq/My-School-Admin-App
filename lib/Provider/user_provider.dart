@@ -5,6 +5,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:my_school_admin_app/Helper/user_helper.dart';
 import 'package:my_school_admin_app/Model/admin_model.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/dashboard.dart';
@@ -104,10 +105,19 @@ class UserProvider with ChangeNotifier {
   }
 
   List<StudentModel> studentsData = [];
-  getUsersData()async{
+  List<TeacherModel> teacherData = [];
+
+  getStudentData()async{
     await UserHelper.userHelper.getUsersData();
     studentsData = UserHelper.userHelper.studentsData;
     log(studentsData.length.toString());
+    notifyListeners();
+  }
+
+  getTeacherData()async{
+    await UserHelper.userHelper.getUsersData();
+    teacherData = UserHelper.userHelper.teacherData;
+    log(teacherData.length.toString());
     notifyListeners();
   }
 
@@ -116,13 +126,9 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  clearTeacherData(){
+    teacherData.clear();
+    notifyListeners();
   }
 
-  // UserProfileModel? userProfileModel;
-
-  // getUserProfile() async{
-  //   userProfileModel = await UserHelper.userHelper.getUserProfile();
-  //   notifyListeners();
-  // }
-
-
+  }

@@ -122,7 +122,7 @@ class ShowAllStudents extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 1000.w,
-                  height: 950.h,
+                  height: MediaQuery.of(context).size.height-50,
                   child: Consumer<UserProvider>(
                     builder: (context,userProvider,child) {
                       return userProvider.studentsData.isEmpty

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_school_admin_app/Model/admin_model.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 
 class UserHelper{
@@ -60,9 +61,11 @@ class UserHelper{
   }
 
   final List<StudentModel> studentsData = [];
+  final List<TeacherModel> teacherData = [];
 
   Future<void> getUsersData() async {
     studentsData.clear();
+    teacherData.clear();
     try {
       final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').get();
 
@@ -71,7 +74,14 @@ class UserHelper{
         final String type = data['type'];
 
         if (type == '1') {
+          final QuerySnapshot userProfileSnapshot = await doc.reference.collection('itemMenu').get();
 
+          for (var userProfileDoc in userProfileSnapshot.docs) {
+            final Map<String, dynamic> userProfileData = userProfileDoc.data() as Map<String, dynamic>;
+
+            final TeacherModel teacherModel = TeacherModel.fromMap(userProfileData);
+            teacherData.add(teacherModel);
+          }
         } else if (type == '2') {
           final QuerySnapshot userProfileSnapshot = await doc.reference.collection('itemMenu').get();
 
@@ -84,7 +94,7 @@ class UserHelper{
         }
       }
 
-      //log('Type 1 documents: ${teacherDocuments.length}');
+      log('Teacher number is: ${teacherData.length}');
       log('Student number is: ${studentsData.length}');
     } catch (e) {
       log('Error getting and categorizing documents: $e');
@@ -108,14 +118,4 @@ class UserHelper{
   }
 
 
-
-  // Future<UserProfileModel> getUserProfile()async{
-  //   CollectionReference<Map<String,dynamic>> mainCollection = FirebaseFirestore.instance.collection('users');
-  //   DocumentReference mainDoc = mainCollection.doc(userID);
-  //   CollectionReference<Map<String,dynamic>> subCollection = mainDoc.collection('itemMenu');
-  //   DocumentSnapshot<Map<String,dynamic>> documentSnapshot = await subCollection.doc('profile').get();
-  //   Map<String, dynamic>? dataMap = documentSnapshot.data();
-  //   print(dataMap);
-  //   return UserProfileModel.fromMap(dataMap!);
-  // }
 }
