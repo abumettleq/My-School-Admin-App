@@ -1,6 +1,6 @@
 class StudentExcelFile
 {
-  String? userID;
+  String? studentID;
   String? studentName;
   String? fatherName;
   String? motherName;
@@ -27,12 +27,12 @@ class StudentExcelFile
     this.motherName,
     this.phoneNumber,
     this.email,
-    this.userID
+    this.studentID
   });
 
   factory StudentExcelFile.fromMap(Map<String,dynamic> map){
     return StudentExcelFile(
-        userID: map['userID'] ?? " ",
+        studentID: map['studentID'] ?? " ",
         email: map['email'] ?? " ",
         address: map['address'] ?? " ",
         image: map['image'] ?? " ",
@@ -62,7 +62,7 @@ class StudentExcelFile
       'mother_name': motherName,
       'phone_number': phoneNumber,
       'email': email,
-      'userID': userID
+      'studentID': studentID
     };
   }
 }

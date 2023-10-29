@@ -79,7 +79,7 @@ class StudentExcelProvider with ChangeNotifier
           var row = decodedExcel.tables[table]!.rows[i];
 
           // is the file following the pattern required?
-          if(i == 0 && row[0]!.value.toString() != 'userID') // No? then terminate reading process.
+          if(i == 0 && row[0]!.value.toString() != 'studentID') // No? then terminate reading process.
           {
             AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
             break;
@@ -88,7 +88,7 @@ class StudentExcelProvider with ChangeNotifier
             continue;
           }
 
-          currentExcelMap['userID'] = row[0]?.value.toString();
+          currentExcelMap['studentID'] = row[0]?.value.toString();
           currentExcelMap['name'] = row[1]?.value.toString();
           currentExcelMap['father_name'] = row[2]?.value.toString();
           currentExcelMap['mother_name'] = row[3]?.value.toString();

@@ -11,7 +11,8 @@ class TeacherExcelFile
           employmentStatus,
           jobTitle,
           degreeHeld,
-          salary;
+          salary,
+          image;
 
   TeacherExcelFile({
     this.birthdate,
@@ -25,7 +26,8 @@ class TeacherExcelFile
     this.nID,
     this.phoneNumber,
     this.salary,
-    this.teacherID
+    this.teacherID,
+    this.image
   });
 
   factory TeacherExcelFile.fromMap(Map<String,dynamic> map){
@@ -41,7 +43,8 @@ class TeacherExcelFile
         employmentStatus: map['employment_status'] ?? " ",
         jobTitle: map['job_title'] ?? " ",
         degreeHeld: map['degree_held'] ?? " ",
-        salary: map['salary'] ?? " "
+        salary: map['salary'] ?? " ",
+        image: map['image'] ?? " "
     );
   }
 
@@ -58,7 +61,8 @@ class TeacherExcelFile
       'employment_status': employmentStatus,
       'job_title': jobTitle,
       'degree_held': degreeHeld,
-      'salary': salary
+      'salary': salary,
+      'image': image
     };
   }
 }

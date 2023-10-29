@@ -1,7 +1,7 @@
 class AdminModel {
 
   String? name;
-  String? imageUrl;
+  String? imageUrl; 
 
   AdminModel({
    this.name,

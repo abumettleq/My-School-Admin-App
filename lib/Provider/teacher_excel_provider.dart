@@ -101,6 +101,7 @@ class TeacherExcelProvider with ChangeNotifier
           currentExcelMap['job_title'] = row[9]?.value.toString();
           currentExcelMap['degree_held'] = row[10]?.value.toString();
           currentExcelMap['salary'] = row[11]?.value.toString();
+          currentExcelMap['image'] = row[12]?.value.toString();
 
           teacherExcelFile = TeacherExcelFile.fromMap(currentExcelMap);
           teacherExcelHelperHere.createNewUser(teacherExcelFile!);
