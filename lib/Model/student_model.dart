@@ -21,6 +21,6 @@ class StudentModel{
     address = map['address'];
     currentClass = map['current_class'];
     contactNumber = map['phone_number'];
-    studentId = map['userID'];
+    studentId = map['studentID'];
   }
 }
