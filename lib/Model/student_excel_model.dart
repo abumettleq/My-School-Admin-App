@@ -1,4 +1,4 @@
-class StudentExcelFile
+class StudentExcelModel
 {
   String? studentID;
   String? studentName;
@@ -14,7 +14,7 @@ class StudentExcelFile
   String? currentClass;
   String? image;
 
-  StudentExcelFile({
+  StudentExcelModel({
     this.address,
     this.image,
     this.studentName,
@@ -30,8 +30,8 @@ class StudentExcelFile
     this.studentID
   });
 
-  factory StudentExcelFile.fromMap(Map<String,dynamic> map){
-    return StudentExcelFile(
+  factory StudentExcelModel.fromMap(Map<String,dynamic> map){
+    return StudentExcelModel(
         studentID: map['studentID'] ?? " ",
         email: map['email'] ?? " ",
         address: map['address'] ?? " ",

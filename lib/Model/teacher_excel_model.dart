@@ -1,4 +1,4 @@
-class TeacherExcelFile
+class TeacherExcelModel
 {
   String? teacherID,
           nID,
@@ -14,7 +14,7 @@ class TeacherExcelFile
           salary,
           image;
 
-  TeacherExcelFile({
+  TeacherExcelModel({
     this.birthdate,
     this.dateOfHire,
     this.degreeHeld,
@@ -30,8 +30,8 @@ class TeacherExcelFile
     this.image
   });
 
-  factory TeacherExcelFile.fromMap(Map<String,dynamic> map){
-    return TeacherExcelFile(
+  factory TeacherExcelModel.fromMap(Map<String,dynamic> map){
+    return TeacherExcelModel(
         teacherID: map['teacherID'] ?? " ",
         nID: map['nID'] ?? " ",
         fullName: map['full_name'] ?? " ",

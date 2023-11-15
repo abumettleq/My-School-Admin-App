@@ -43,7 +43,7 @@ class PeopleWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: 450.w,
+                        width: 330.w,
                         height: 250.h,
                         padding: EdgeInsets.all(25.w),
                         decoration: BoxDecoration(
@@ -56,13 +56,13 @@ class PeopleWidget extends StatelessWidget {
                           children: [
                             Text(
                               "Students",
-                              style: TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.black, fontSize: 14.sp,fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: [
                                 Icon(
                                   Icons.people_alt_outlined,
-                                  size: 24.sp,
+                                  size: 16.sp,
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -70,7 +70,7 @@ class PeopleWidget extends StatelessWidget {
                                 Text(
                                   "${userProvider.studentsNumber}",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp),
                                 ),
                               ],
                             ),
@@ -80,11 +80,11 @@ class PeopleWidget extends StatelessWidget {
                                   width: 35.w,
                                   height: 35.w,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.r),
+                                      borderRadius: BorderRadius.circular(30.r),
                                       color: Colors.white),
                                   child: Icon(
                                     Icons.bar_chart_rounded,
-                                    size: 24.sp,
+                                    size: 18.sp,
                                     color: const Color.fromRGBO(150, 101, 255, 1.0),
                                   ),
                                 ),
@@ -94,7 +94,7 @@ class PeopleWidget extends StatelessWidget {
                                 Text(
                                   "${((userProvider.studentsNumber / userProvider.totalUsers) * 100).toStringAsFixed(2)}%",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp),
                                 ),
                               ],
                             ),
@@ -110,7 +110,7 @@ class PeopleWidget extends StatelessWidget {
                                   const Color.fromRGBO(142, 90, 252, 1.0),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
+                                  fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () {
                                   studentExcelProvider.selectExcelFile();
@@ -118,7 +118,7 @@ class PeopleWidget extends StatelessWidget {
                                 child: Text(
                                   "Upload New Students",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black,fontWeight: FontWeight.bold, fontSize: 14.sp),
                                 ),
                               ),
                             )
@@ -127,7 +127,7 @@ class PeopleWidget extends StatelessWidget {
                       ),
                       SizedBox(width: 50.w,),
                       Container(
-                        width: 450.w,
+                        width: 330.w,
                         height: 250.h,
                         padding: EdgeInsets.all(25.w),
                         decoration: BoxDecoration(
@@ -141,13 +141,13 @@ class PeopleWidget extends StatelessWidget {
                             Text(
                               "Teachers",
                               style:
-                              TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
+                              TextStyle(color: Colors.black, fontSize: 14.sp,fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: [
                                 Icon(
                                   Icons.people_alt_outlined,
-                                  size: 24.sp,
+                                  size: 18.sp,
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -155,7 +155,7 @@ class PeopleWidget extends StatelessWidget {
                                 Text(
                                   "${userProvider.teachersNumber}",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp),
                                 ),
                               ],
                             ),
@@ -165,11 +165,11 @@ class PeopleWidget extends StatelessWidget {
                                   width: 35.w,
                                   height: 35.w,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.r),
+                                      borderRadius: BorderRadius.circular(30.r),
                                       color: Colors.white),
                                   child: Icon(
                                     Icons.bar_chart_rounded,
-                                    size: 24.sp,
+                                    size: 18.sp,
                                     color: const Color.fromRGBO(150, 101, 255, 1.0),
                                   ),
                                 ),
@@ -179,7 +179,7 @@ class PeopleWidget extends StatelessWidget {
                                 Text(
                                     "${((userProvider.teachersNumber / userProvider.totalUsers) * 100).toStringAsFixed(2)}%",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp),
                                 ),
                               ],
                             ),
@@ -195,7 +195,7 @@ class PeopleWidget extends StatelessWidget {
                                   const Color.fromRGBO(142, 90, 252, 1.0),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
+                                  fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () {
                                   teacherExcelProvider.selectExcelFile();
@@ -203,7 +203,76 @@ class PeopleWidget extends StatelessWidget {
                                 child: Text(
                                   "Upload New Teachers",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black,fontWeight: FontWeight.bold, fontSize: 14.sp),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 50.w,), 
+                      Container(
+                        width: 330.w,
+                        height: 250.h,
+                        padding: EdgeInsets.all(25.w),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(217, 217, 217, 1.0),
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Student Utilities",
+                              style: TextStyle(color: Colors.black, fontSize: 16.sp,fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(225.w,40.h),
+                                ),
+                                onPressed: () async{
+                                  showDialog(context: context, builder: (context){
+                                    return const ShowAllStudents();
+                                  });
+                                  userProvider.clearStudentData();
+                                  await userProvider.getStudentData();
+                                },
+                                child: Text(
+                                  "Show All Students",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(225.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Notify a Student",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             )
@@ -217,76 +286,7 @@ class PeopleWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: 450.w,
-                        height: 250.h,
-                        padding: EdgeInsets.all(25.w),
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(217, 217, 217, 1.0),
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Student Utilities",
-                              style: TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: const StadiumBorder(),
-                                  backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
-                                  foregroundColor:
-                                  const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
-                                ),
-                                onPressed: () async{
-                                  showDialog(context: context, builder: (context){
-                                    return const ShowAllStudents();
-                                  });
-                                  userProvider.clearStudentData();
-                                  await userProvider.getStudentData();
-                                },
-                                child: Text(
-                                  "Show All Students",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: const StadiumBorder(),
-                                  backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
-                                  foregroundColor:
-                                  const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
-                                ),
-                                onPressed: () {
-
-                                },
-                                child: Text(
-                                  "Notify a Student",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 50.w,),
-                      Container(
-                        width: 450.w,
+                        width: 330.w,
                         height: 250.h,
                         padding: EdgeInsets.all(25.w),
                         decoration: BoxDecoration(
@@ -300,7 +300,7 @@ class PeopleWidget extends StatelessWidget {
                             Text(
                               "Teacher Utilities",
                               style:
-                              TextStyle(color: Colors.black, fontSize: 20.sp,fontWeight: FontWeight.bold),
+                              TextStyle(color: Colors.black, fontSize: 16.sp,fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 20.h,
@@ -314,7 +314,7 @@ class PeopleWidget extends StatelessWidget {
                                   const Color.fromRGBO(142, 90, 252, 1.0),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
+                                  fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () async{
                                   showDialog(context: context, builder: (context){
@@ -326,7 +326,7 @@ class PeopleWidget extends StatelessWidget {
                                 child: Text(
                                   "Show All Teachers",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -339,7 +339,7 @@ class PeopleWidget extends StatelessWidget {
                                   const Color.fromRGBO(142, 90, 252, 1.0),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
-                                  fixedSize: Size(330.w,40.h),
+                                  fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () {
 
@@ -347,7 +347,94 @@ class PeopleWidget extends StatelessWidget {
                                 child: Text(
                                   "Notify a Teacher",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 20.sp),
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 50.w,),
+                      Container(
+                        width: 330.w,
+                        height: 300.h,
+                        padding: EdgeInsets.all(25.w),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(217, 217, 217, 1.0),
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Class Utilities",
+                              style:
+                              TextStyle(color: Colors.black, fontSize: 16.sp,fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(225.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Add a Class",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(225.w,40.h),
+                                ),
+                                onPressed: () async{
+                                  
+                                },
+                                child: Text(
+                                  "Show All Classes",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  foregroundColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.5),
+                                  fixedSize: Size(225.w,40.h),
+                                ),
+                                onPressed: () {
+
+                                },
+                                child: Text(
+                                  "Notify a Class",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             )

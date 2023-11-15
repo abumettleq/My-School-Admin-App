@@ -7,19 +7,22 @@ class StudentExcelHelper {
 
   DocumentReference<Map<String, dynamic>>? docReference;
 
-  Future<void> createNewUser(StudentExcelFile studentExcelFile) async {
-    docReference = FirebaseFirestore.instance
-        .collection('users')
-        .doc(studentExcelFile.studentID)
-        .collection("itemMenu")
-        .doc("profile");
+  Future<void> createNewUser(List<StudentExcelModel?> students) async {
+    for (var studentExcelFile in students) {
+      docReference = FirebaseFirestore.instance
+          .collection('users')
+          .doc(studentExcelFile!.studentID)
+          .collection("itemMenu")
+          .doc("profile");
 
-    await docReference!.set(studentExcelFile.toMap());
+      await docReference!.set(studentExcelFile.toMap());
 
-    docReference = FirebaseFirestore.instance
-        .collection('users')
-        .doc(studentExcelFile.studentID);
+      docReference = FirebaseFirestore.instance
+          .collection('users')
+          .doc(studentExcelFile.studentID);
 
-    await docReference!.set({'password': 'A${studentExcelFile.studentID}a', 'type':'2'});
+      await docReference!
+          .set({'password': 'A${studentExcelFile.studentID}a', 'type': '2'});
+    }
   }
 }

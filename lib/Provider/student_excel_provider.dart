@@ -11,8 +11,8 @@ class StudentExcelProvider with ChangeNotifier
   FilePickerResult? result;
   PlatformFile? excelFile;
   Map<String,dynamic> currentExcelMap = {};
-  StudentExcelFile? studentExcelFile;
-  StudentExcelHelper studentExcelHelperHere = StudentExcelHelper.studentExcelHelper;
+  StudentExcelModel? studentExcelFile;
+  List<StudentExcelModel?> students = [];
 
   void selectExcelFile() async {
     result = await FilePicker.platform.pickFiles(
@@ -102,9 +102,16 @@ class StudentExcelProvider with ChangeNotifier
           currentExcelMap['current_class'] = row[11]?.value.toString();
           currentExcelMap['image'] = row[12]?.value.toString();
 
-          studentExcelFile = StudentExcelFile.fromMap(currentExcelMap);
-          studentExcelHelperHere.createNewUser(studentExcelFile!);
+          studentExcelFile = StudentExcelModel.fromMap(currentExcelMap);
+          students.add(studentExcelFile);
         }
+      }
+
+      if(students.isNotEmpty)
+      {
+        StudentExcelHelper.studentExcelHelper.createNewUser(students);
+        AppRouter.showSnackBar("Success", "Students were uploaded successfully.");
+        students.clear();
       }
 
       excelFile = null;
