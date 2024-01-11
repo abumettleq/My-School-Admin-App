@@ -22,7 +22,7 @@ class TeacherExcelHelper {
           .doc(teacherExcelFile.teacherID);
 
       await docReference!
-          .set({'password': 'A${teacherExcelFile.teacherID}a', 'type': '1'});
+          .update({'password': 'A${teacherExcelFile.teacherID}a', 'type': '1'});
     }
   }
 }
