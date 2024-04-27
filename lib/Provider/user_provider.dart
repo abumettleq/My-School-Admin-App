@@ -8,7 +8,7 @@ import 'package:my_school_admin_app/Model/student_model.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
-import 'package:my_school_admin_app/screens/dashboard.dart';
+import 'package:my_school_admin_app/screens/mainview.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class UserProvider with ChangeNotifier {
@@ -68,7 +68,7 @@ class UserProvider with ChangeNotifier {
         }else{
           btnController.success();
           Future.delayed(const Duration(milliseconds: 600), () async {
-            AppRouter.pushWithReplacementToWidget(const Dashboard());
+            AppRouter.pushWithReplacementToWidget(const MainView());
           });
           userIDController.clear();
           passwordController.clear();

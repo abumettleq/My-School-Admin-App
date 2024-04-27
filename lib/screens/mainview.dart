@@ -15,14 +15,14 @@ import 'package:provider/provider.dart';
 
 import 'Widgets/dashboard_widget.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class MainView extends StatefulWidget {
+  const MainView({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<MainView> createState() => _MainViewState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _MainViewState extends State<MainView> {
   int selectedIdx = 0;
 
   Map<int, dynamic> items = {
@@ -85,48 +85,6 @@ class _DashboardState extends State<Dashboard> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.sp,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 1300.w,
-                        height: 64.h,
-                        color: Colors.white,
-                        child: TextField(
-                          cursorColor: const Color(0xffffabdc),
-                          decoration: InputDecoration(
-                            hoverColor: Colors.white,
-                            suffixIcon: Icon(
-                              Icons.notifications,
-                              color: Colors.blue,
-                              size: 24.sp,
-                              
-                            ),
-                      
-                            prefixIcon: Icon(
-                              Icons.search,
-                              size: 24.sp,
-                              color: Colors.blue,
-                            ),
-                            hintText: 'Quick Search',
-                            hintStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 17.sp,
-                                fontWeight: FontWeight.w400),
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 10.h),
-                            fillColor: Colors.white,
-                            filled: true,
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                style: BorderStyle.none,
-                              ),
-                            ),
                           ),
                         ),
                       )
