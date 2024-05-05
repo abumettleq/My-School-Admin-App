@@ -9,14 +9,10 @@ import 'package:excel/excel.dart';
 
 class TeacherExcelProvider with ChangeNotifier
 {
-  FilePickerResult? result;
   PlatformFile? excelFile;
-  Map<String,dynamic> currentExcelMap = {};
-  TeacherExcelModel? teacherExcelFile;
-  List<TeacherExcelModel?> teachers = [];
 
   void selectExcelFile() async {
-    result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['xlsx', 'xls'],
       allowMultiple: false,
@@ -65,6 +61,7 @@ class TeacherExcelProvider with ChangeNotifier
     try{
       var bytes = excelFile!.bytes;
       var decodedExcel = Excel.decodeBytes(bytes!);
+      List<TeacherExcelModel> teachers = [];
 
       for (var table in decodedExcel.tables.keys) {
 
@@ -79,16 +76,21 @@ class TeacherExcelProvider with ChangeNotifier
         {
           var row = decodedExcel.tables[table]!.rows[i];
 
-          // is the file following the pattern required?
-          if(i == 0 && row[0]!.value.toString() != 'teacherID') // No? then terminate reading process.
+          // is the first row following the pattern required?
+          if(i == 0) 
           {
-            AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
-            break;
-          }
-          else if(i == 0) { // Yes? then skip to next row.
+            if(row[0]!.value.toString() != 'teacherID') // No? then terminate reading process.
+            {
+              AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
+              break;
+            }
+            else // Yes? then skip to next row. (first row is always skipped)
+            {
             continue;
+            }
           }
 
+          Map<String,dynamic> currentExcelMap = {};
           currentExcelMap['teacherID'] = row[0]?.value.toString();
           currentExcelMap['nID'] = row[1]?.value.toString();
           currentExcelMap['full_name'] = row[2]?.value.toString();
@@ -103,7 +105,7 @@ class TeacherExcelProvider with ChangeNotifier
           currentExcelMap['salary'] = row[11]?.value.toString();
           currentExcelMap['image'] = row[12]?.value.toString();
 
-          teacherExcelFile = TeacherExcelModel.fromMap(currentExcelMap);
+          TeacherExcelModel teacherExcelFile = TeacherExcelModel.fromMap(currentExcelMap);
           teachers.add(teacherExcelFile);
         }
       }
@@ -112,12 +114,9 @@ class TeacherExcelProvider with ChangeNotifier
       {
         TeacherExcelHelper.teacherExcelHelper.createNewUser(teachers);
         AppRouter.showSnackBar("Success", "Teachers were uploaded successfully.");
-        teachers.clear();
       }
 
       excelFile = null;
-      teacherExcelFile = null;
-      currentExcelMap = {};
       notifyListeners();
     }catch (error) {
       AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");

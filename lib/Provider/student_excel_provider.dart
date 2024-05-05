@@ -8,21 +8,17 @@ import 'package:my_school_admin_app/Router/app_router.dart';
 
 class StudentExcelProvider with ChangeNotifier
 {
-  FilePickerResult? result;
   PlatformFile? excelFile;
-  Map<String,dynamic> currentExcelMap = {};
-  StudentExcelModel? studentExcelFile;
-  List<StudentExcelModel?> students = [];
 
   void selectExcelFile() async {
-    result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['xlsx', 'xls'],
       allowMultiple: false,
     );
 
     if (result != null) {
-      final selectedFile = result!.files.single;
+      final selectedFile = result.files.single;
       final fileBytes = selectedFile.bytes;
 
       if (fileBytes != null) {
@@ -64,6 +60,7 @@ class StudentExcelProvider with ChangeNotifier
     try{
       var bytes = excelFile!.bytes;
       var decodedExcel = Excel.decodeBytes(bytes!);
+      List<StudentExcelModel> students = [];
 
       for (var table in decodedExcel.tables.keys) {
 
@@ -78,16 +75,20 @@ class StudentExcelProvider with ChangeNotifier
         {
           var row = decodedExcel.tables[table]!.rows[i];
 
-          // is the file following the pattern required?
-          if(i == 0 && row[0]!.value.toString() != 'studentID') // No? then terminate reading process.
+          // is the first row following the pattern required?
+          if(i == 0) 
           {
-            AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
-            break;
-          }
-          else if(i == 0) { // Yes? then skip to next row.
+            if(row[0]!.value.toString() != 'studentID') // No? then terminate reading process.
+            {
+              AppRouter.showErrorSnackBar("Error", "The Excel file had an invalid pattern.");
+              break;
+            }
+            else // Yes? then skip to next row. (first row is always skipped)
+            {
             continue;
+            }
           }
-
+          Map<String,dynamic> currentExcelMap = {};
           currentExcelMap['studentID'] = row[0]?.value.toString();
           currentExcelMap['name'] = row[1]?.value.toString();
           currentExcelMap['father_name'] = row[2]?.value.toString();
@@ -98,11 +99,11 @@ class StudentExcelProvider with ChangeNotifier
           currentExcelMap['address'] = row[7]?.value.toString();
           currentExcelMap['phone_number'] = row[8]?.value.toString();
           currentExcelMap['email'] = row[9]?.value.toString();
-          currentExcelMap['current_AY'] = row[10]?.value.toString();
+          currentExcelMap['academic_year'] = row[10]?.value.toString();
           currentExcelMap['current_class'] = row[11]?.value.toString();
           currentExcelMap['image'] = row[12]?.value.toString();
 
-          studentExcelFile = StudentExcelModel.fromMap(currentExcelMap);
+          StudentExcelModel studentExcelFile = StudentExcelModel.fromMap(currentExcelMap);
           students.add(studentExcelFile);
         }
       }
@@ -111,12 +112,9 @@ class StudentExcelProvider with ChangeNotifier
       {
         StudentExcelHelper.studentExcelHelper.createNewUser(students);
         AppRouter.showSnackBar("Success", "Students were uploaded successfully.");
-        students.clear();
       }
 
       excelFile = null;
-      studentExcelFile = null;
-      currentExcelMap = {};
       notifyListeners();
     }catch (error) {
       AppRouter.showErrorSnackBar("Failed", "Failed to read the selected file.");

@@ -1,26 +1,31 @@
 class StudentModel{
-  String? name;
-  String? fatherName;
-  String? address;
-  String? currentClass;
-  String? contactNumber;
-  String? studentId;
+  String studentID = '';
+  String studentName = '';
+  String fatherName = '';
+  String motherName = '';
+  String gender = '';
+  String birthday = '';
+  String bloodGroup = '';
+  String address = '';
+  String phoneNumber = '';
+  String email = '';
+  String academicYear = '';
+  String currentClass = '';
 
-  StudentModel({
-    this.name,
-    this.fatherName,
-    this.address,
-    this.contactNumber,
-    this.currentClass,
-    this.studentId
-  });
+  StudentModel();
 
   StudentModel.fromMap(Map<String,dynamic> map){
-    name = map['name'];
-    fatherName = map['father_name'];
-    address = map['address'];
-    currentClass = map['current_class'];
-    contactNumber = map['phone_number'];
-    studentId = map['studentID'];
+    studentID = map['studentID'] ;
+    email = map['email'] ;
+    address = map['address'] ;
+    studentName = map['name'] ;
+    birthday = map['birthday'] ;
+    bloodGroup = map['blood_group'] ;
+    academicYear = map['academic_year'] ;
+    currentClass = map['current_class'] ;
+    fatherName = map['father_name'] ;
+    gender = map['gender'] ;
+    motherName = map['mother_name'] ;
+    phoneNumber = map['phone_number'];
   }
 }

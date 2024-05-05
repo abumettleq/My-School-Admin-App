@@ -60,49 +60,65 @@ class UserHelper{
     }
   }
 
-  final List<StudentModel> studentsData = [];
-  final List<TeacherModel> teacherData = [];
+  Future<List<StudentModel>> getStudentsData() async
+  {
+    List<StudentModel> studentModels = [];
+    try
+    {
+      QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection("users")
+      .where('type', isEqualTo: "2")
+      .get();
 
-  Future<void> getUsersData() async {
-    studentsData.clear();
-    teacherData.clear();
-    try {
-      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').get();
+      for(var document in snapshot.docs)
+      {
+        StudentModel studentModel = StudentModel();
 
-      for (var doc in querySnapshot.docs) {
-        final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        final String type = data['type'];
+        DocumentSnapshot snapshot = await document.reference.collection('itemMenu')
+        .doc('profile')
+        .get();
 
-        if (type == '1') {
-          final QuerySnapshot userProfileSnapshot = await doc.reference.collection('itemMenu').get();
+        studentModel = StudentModel.fromMap(snapshot.data() as Map<String, dynamic>);
 
-          for (var userProfileDoc in userProfileSnapshot.docs) {
-            final Map<String, dynamic> userProfileData = userProfileDoc.data() as Map<String, dynamic>;
-
-            final TeacherModel teacherModel = TeacherModel.fromMap(userProfileData);
-            teacherData.add(teacherModel);
-          }
-        } else if (type == '2') {
-          final QuerySnapshot userProfileSnapshot = await doc.reference.collection('itemMenu').get();
-
-          for (var userProfileDoc in userProfileSnapshot.docs) {
-            final Map<String, dynamic> userProfileData = userProfileDoc.data() as Map<String, dynamic>;
-
-            final StudentModel student = StudentModel.fromMap(userProfileData);
-            studentsData.add(student);
-          }
-        }
+        studentModels.add(studentModel);
       }
-
-      log('Teacher number is: ${teacherData.length}');
-      log('Student number is: ${studentsData.length}');
-    } catch (e) {
-      log('Error getting and categorizing documents: $e');
     }
+    catch(e)
+    {
+      log("Error: $e");
+    }
+    log('Number of students data fetched: ${studentModels.length}');
+    return studentModels;
   }
+  
+  Future<List<TeacherModel>> getTeachersData() async
+  {
+    List<TeacherModel> teacherModels = [];
+    try
+    {
+      QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection("users")
+      .where('type', isEqualTo: "1")
+      .get();
 
+      for(var document in snapshot.docs)
+      {
+        TeacherModel teacherModel = TeacherModel();
+        
+        DocumentSnapshot snapshot = await document.reference.collection('itemMenu')
+        .doc('profile')
+        .get();
 
+        teacherModel = TeacherModel.fromMap(snapshot.data() as Map<String, dynamic>);
 
+        teacherModels.add(teacherModel);
+      }
+    }
+    catch(e)
+    {
+      log("Error: $e");
+    }
+    log('Number of teachers data fetched: ${teacherModels.length}');
+    return teacherModels;
+  }
 
   Future<List<AdminModel>> getAdminProfile(String id)async{
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await userCollection.doc(id).collection("details").get();
@@ -117,5 +133,21 @@ class UserHelper{
     return adminDetails;
   }
 
+  Future<bool> deleteUser(String userId) async
+  {
+    try 
+    {
+      // Get a reference to the document
+      DocumentReference documentReference = FirebaseFirestore.instance.collection('users').doc(userId);
 
+      // Delete the document
+      await documentReference.delete();
+      
+      return true;
+    } 
+    catch (e) 
+    {
+      return false;
+    }
+  }
 }

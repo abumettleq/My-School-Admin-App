@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
-import 'package:my_school_admin_app/screens/Widgets/adminstration_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/calendar_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/help_widget.dart';
+import 'package:my_school_admin_app/screens/Widgets/classes_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/people_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/projects_widget.dart';
 import 'package:my_school_admin_app/screens/Widgets/feedbacks_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/timesheet_widget.dart';
-import 'package:my_school_admin_app/screens/Widgets/training_widget.dart';
 import 'package:my_school_admin_app/screens/login.dart';
 import 'package:provider/provider.dart';
 
@@ -28,13 +23,8 @@ class _MainViewState extends State<MainView> {
   Map<int, dynamic> items = {
     0: [Icons.dashboard, "Dashboard", const DashboardWidget()],
     1: [Icons.people, "People", const PeopleWidget()],
-    2: [Icons.paste_rounded, "Attendance", const ProjectsWidget()],
-    3: [Icons.calendar_today_rounded, "Calender", const CalendarWidget()],
-    4: [Icons.live_tv_rounded, "Training", const TrainingWidget()],
-    5: [Icons.access_time_rounded, "Timesheet", const TimesheetWidget()],
-    6: [Icons.messenger_rounded, "Feedbacks", const FeedbacksWidget()],
-    7: [Icons.home_work_rounded, "Administration", const AdministrationWidget()],
-    8: [Icons.help_outline_rounded, "Help", const HelpWidget()]
+    2: [Icons.people, "Classes", const ClassesWidget()],
+    3: [Icons.messenger_rounded, "Feedbacks", const FeedbacksWidget()],
   };
 
   Widget currentWidget = const DashboardWidget();

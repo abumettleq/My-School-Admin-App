@@ -38,12 +38,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDNNbaSO0J1px6MLV3QHvupAMEVDlN7v_8',
-    appId: '1:14084816707:web:29e07c797a2bf50c89b9f6',
-    messagingSenderId: '14084816707',
-    projectId: 'myschool-48ec8',
-    authDomain: 'myschool-48ec8.firebaseapp.com',
-    storageBucket: 'myschool-48ec8.appspot.com',
-    measurementId: 'G-3K8815V5ME',
+    apiKey: "AIzaSyCyIl3mB3Weteqi1ZG91W7Os1Vu_UF92T4",
+    authDomain: "my-school-app-f1fe3.firebaseapp.com",
+    projectId: "my-school-app-f1fe3",
+    storageBucket: "my-school-app-f1fe3.appspot.com",
+    messagingSenderId: "572451876482",
+    appId: "1:572451876482:web:51a2e38ad3fd229d4bce9b"
   );
 }

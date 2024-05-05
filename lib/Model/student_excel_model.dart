@@ -1,33 +1,33 @@
 class StudentExcelModel
 {
-  String? studentID;
-  String? studentName;
-  String? fatherName;
-  String? motherName;
-  String? gender;
-  String? birthday;
-  String? bloodGroup;
-  String? address;
-  String? phoneNumber;
-  String? email;
-  String? currentAY;
-  String? currentClass;
-  String? image;
+  String studentID;
+  String studentName;
+  String fatherName;
+  String motherName;
+  String gender;
+  String birthday;
+  String bloodGroup;
+  String address;
+  String phoneNumber;
+  String email;
+  String academicYear;
+  String currentClass;
+  String image;
 
   StudentExcelModel({
-    this.address,
-    this.image,
-    this.studentName,
-    this.birthday,
-    this.bloodGroup,
-    this.currentAY,
-    this.currentClass,
-    this.fatherName,
-    this.gender,
-    this.motherName,
-    this.phoneNumber,
-    this.email,
-    this.studentID
+    this.address = '',
+    this.image = '',
+    this.studentName = '',
+    this.birthday = '',
+    this.bloodGroup = '',
+    this.academicYear = '',
+    this.currentClass = '',
+    this.fatherName = '',
+    this.gender = '',
+    this.motherName = '',
+    this.phoneNumber = '',
+    this.email = '',
+    this.studentID = ''
   });
 
   factory StudentExcelModel.fromMap(Map<String,dynamic> map){
@@ -39,7 +39,7 @@ class StudentExcelModel
         studentName: map['name'] ?? " ",
         birthday: map['birthday'] ?? " ",
         bloodGroup: map['blood_group'] ?? " ",
-        currentAY: map['current_AY'] ?? " ",
+        academicYear: map['academic_year'] ?? " ",
         currentClass: map['current_class'] ?? " ",
         fatherName: map['father_name'] ?? " ",
         gender: map['gender'] ?? " ",
@@ -54,8 +54,8 @@ class StudentExcelModel
       'address': address,
       'image': image,
       'birthday': birthday,
-      'bloodGroup': bloodGroup,
-      'current_AY': currentAY,
+      'blood_group': bloodGroup,
+      'academic_year': academicYear,
       'current_class': currentClass,
       'father_name': fatherName,
       'gender': gender,

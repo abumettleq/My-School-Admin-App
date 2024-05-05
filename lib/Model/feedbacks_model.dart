@@ -3,23 +3,12 @@ import 'package:intl/intl.dart';
 
 class FeedbacksModel
 {
-  String? id;
-  String? comment;
-  String? emailAddress;
-  String? fullName;
-  String? sidOrMobile;
-  String? timestamp;
-
-  FeedbacksModel(
-    {
-      this.id,
-      this.comment,
-      this.emailAddress,
-      this.fullName,
-      this.sidOrMobile,
-      this.timestamp,
-    }
-  );
+  String id = '';
+  String comment = '';
+  String emailAddress = '';
+  String fullName = '';
+  String sidOrMobile = '';
+  String timestamp = '';
 
   FeedbacksModel.fromMap(Map<String,dynamic> map, String documentId){
     id = documentId;

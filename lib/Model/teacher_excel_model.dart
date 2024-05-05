@@ -1,6 +1,6 @@
 class TeacherExcelModel
 {
-  String? teacherID,
+  String teacherID,
           nID,
           fullName,
           gender,
@@ -15,25 +15,25 @@ class TeacherExcelModel
           image;
 
   TeacherExcelModel({
-    this.birthdate,
-    this.dateOfHire,
-    this.degreeHeld,
-    this.email,
-    this.employmentStatus,
-    this.fullName,
-    this.gender,
-    this.jobTitle,
-    this.nID,
-    this.phoneNumber,
-    this.salary,
-    this.teacherID,
-    this.image
+    this.birthdate = '',
+    this.dateOfHire = '',
+    this.degreeHeld = '',
+    this.email = '',
+    this.employmentStatus = '',
+    this.fullName = '',
+    this.gender = '',
+    this.jobTitle = '',
+    this.nID = '',
+    this.phoneNumber = '',
+    this.salary = '',
+    this.teacherID = '',
+    this.image = ''
   });
 
   factory TeacherExcelModel.fromMap(Map<String,dynamic> map){
     return TeacherExcelModel(
         teacherID: map['teacherID'] ?? " ",
-        nID: map['nID'] ?? " ",
+        nID: map['nId'] ?? " ",
         fullName: map['full_name'] ?? " ",
         gender: map['gender'] ?? " ",
         birthdate: map['birthdate'] ?? " ",

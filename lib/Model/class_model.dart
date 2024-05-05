@@ -1,9 +1,9 @@
 class ClassModel
 {
-  String? id,
-          name,
-          section;
-  List<String?> students = [];
+  String id = '',
+          name = '',
+          section = '';
+  List<String> students = [];
 
   
 }

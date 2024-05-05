@@ -8,14 +8,11 @@ import 'package:my_school_admin_app/Model/student_model.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Model/user_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
-import 'package:my_school_admin_app/screens/mainview.dart';
+import 'package:my_school_admin_app/screens/main_view.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class UserProvider with ChangeNotifier {
-  UserProvider(){
-    categorizeDocuments();
-    notifyListeners();
-  }
+  UserProvider();
 
   GlobalKey<FormState> loginKey = GlobalKey();
   TextEditingController userIDController = TextEditingController();
@@ -105,19 +102,20 @@ class UserProvider with ChangeNotifier {
   }
 
   List<StudentModel> studentsData = [];
-  List<TeacherModel> teacherData = [];
-
+  bool isStudentDataLoading = true;
   getStudentData()async{
-    await UserHelper.userHelper.getUsersData();
-    studentsData = UserHelper.userHelper.studentsData;
-    log(studentsData.length.toString());
+    isStudentDataLoading = true;
+    studentsData = await UserHelper.userHelper.getStudentsData();
+    isStudentDataLoading = false;
     notifyListeners();
   }
 
+  bool isTeacherDataLoading = true;
+  List<TeacherModel> teacherData = [];
   getTeacherData()async{
-    await UserHelper.userHelper.getUsersData();
-    teacherData = UserHelper.userHelper.teacherData;
-    log(teacherData.length.toString());
+    isTeacherDataLoading = true;
+    teacherData = await UserHelper.userHelper.getTeachersData();
+    isTeacherDataLoading = false;
     notifyListeners();
   }
 
@@ -129,6 +127,20 @@ class UserProvider with ChangeNotifier {
   clearTeacherData(){
     teacherData.clear();
     notifyListeners();
+  }
+
+  deleteUser(String userId) async
+  {
+    bool isDeleted = await UserHelper.userHelper.deleteUser(userId);
+    if(isDeleted)
+    {
+      AppRouter.showSnackBar("Success", "User record was deleted successfully.");
+    }
+    else
+    {
+      AppRouter.showErrorSnackBar("Error", "Failed to delete a user record, try again later.");
+    }
+    AppRouter.pop();
   }
 
   }
