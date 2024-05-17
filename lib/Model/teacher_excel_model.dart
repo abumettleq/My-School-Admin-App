@@ -33,7 +33,7 @@ class TeacherExcelModel
   factory TeacherExcelModel.fromMap(Map<String,dynamic> map){
     return TeacherExcelModel(
         teacherID: map['teacherID'] ?? " ",
-        nID: map['nId'] ?? " ",
+        nID: map['nID'] ?? " ",
         fullName: map['full_name'] ?? " ",
         gender: map['gender'] ?? " ",
         birthdate: map['birthdate'] ?? " ",
@@ -51,7 +51,7 @@ class TeacherExcelModel
   Map<String, dynamic> toMap(){
     return {
       'teacherID': teacherID,
-      'nId': nID,
+      'nID': nID,
       'full_name': fullName,
       'gender': gender,
       'birthdate': birthdate,

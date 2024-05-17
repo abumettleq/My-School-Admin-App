@@ -16,7 +16,7 @@ class TeacherModel{
 
   TeacherModel.fromMap(Map<String,dynamic> map){
     teacherID = map['teacherID'];
-    nID = map['nId'];
+    nID = map['nID'];
     fullName = map['full_name'];
     gender = map['gender'];
     birthdate = map['birthdate'];

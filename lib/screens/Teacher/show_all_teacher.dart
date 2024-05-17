@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
+import 'package:my_school_admin_app/screens/Shared/notify_specific_user.dart';
 import 'package:my_school_admin_app/screens/Teacher/modify_specifc_teacher.dart';
 import 'package:provider/provider.dart';
 
@@ -257,7 +258,7 @@ class ShowAllTeacher extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 90.w,
+                      width: 150.w,
                       //height: 40.h,
                       child: Row(
                         children: [
@@ -295,6 +296,23 @@ class ShowAllTeacher extends StatelessWidget {
                                   size: 24.sp,
                                 ));
                           }),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          IconButton(
+                              style: IconButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 212, 212, 212),
+                              ),
+                              onPressed: () {
+                                AppRouter.pushToWidget(NotifySpecificUser(
+                                    userId: teachersData[index].teacherID));
+                              },
+                              icon: Icon(
+                                Icons.notification_add,
+                                color: Colors.green,
+                                size: 24.sp,
+                              )),
                         ],
                       ),
                     ),
