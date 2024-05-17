@@ -96,7 +96,7 @@ class PeopleWidget extends StatelessWidget {
                                   showDialog(context: context, builder: (context){
                                     return const ShowAllStudents();
                                   });
-                                  userProvider.clearStudentData();
+                                  userProvider.clearStudentsData();
                                   await userProvider.getStudentData();
                                 },
                                 child: Text(
@@ -187,7 +187,7 @@ class PeopleWidget extends StatelessWidget {
                                   showDialog(context: context, builder: (context){
                                     return const ShowAllTeacher();
                                   });
-                                  userProvider.clearTeacherData();
+                                  userProvider.clearTeachersData();
                                   await userProvider.getTeacherData();
                                 },
                                 child: Text(

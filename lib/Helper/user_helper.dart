@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:my_school_admin_app/Model/admin_model.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
@@ -149,5 +150,27 @@ class UserHelper{
     {
       return false;
     }
+  }
+
+  Future<bool> notifyUser(String userId, String text) async
+  {
+    String collectionPath = "/users/$userId/itemMenu/profile/notifications";
+    try
+    {
+      await FirebaseFirestore.instance.collection(collectionPath)
+      .doc()
+      .set(
+        {
+          'text': text,
+          'timeSent': Timestamp.now()
+        }
+      );
+    }
+    catch(e)
+    {
+      debugPrint("Error: $e");
+      return false;
+    }
+    return true;
   }
 }

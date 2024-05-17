@@ -28,4 +28,20 @@ class TeacherModel{
     degreeHeld = map['degree_held'];
     salary = map['salary'];
   }
+
+  String toSearchable()
+  {
+    return teacherID +
+          nID +
+          fullName +
+          gender +
+          birthdate +
+          phoneNumber +
+          email +
+          dateOfHire +
+          employmentStatus +
+          jobTitle +
+          degreeHeld +
+          salary;
+  }
 }

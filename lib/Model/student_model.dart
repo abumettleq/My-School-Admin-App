@@ -28,4 +28,20 @@ class StudentModel{
     motherName = map['mother_name'] ;
     phoneNumber = map['phone_number'];
   }
+
+  String toSearchable()
+  {
+    return studentID +
+          studentName + 
+          fatherName +
+          motherName +
+          gender +
+          birthday +
+          bloodGroup +
+          address +
+          phoneNumber +
+          email +
+          academicYear +
+          currentClass;
+  }
 }
