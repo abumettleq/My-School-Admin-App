@@ -3,7 +3,8 @@ class ClassModel
   String id = '',
           name = '',
           section = '';
-  List<String> students = [];
 
-  
+  String toSearchable() {
+    return id + name + section;
+  }
 }

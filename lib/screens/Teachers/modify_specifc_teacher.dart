@@ -60,6 +60,7 @@ class _ModifySpecificTeacherState extends State<ModifySpecificTeacher> {
               TextFormField(
                 controller: _teacherIdController,
                 decoration: const InputDecoration(labelText: 'Teacher ID'),
+                enabled: false,
               ),
               TextFormField(
                 controller: _nIdController,

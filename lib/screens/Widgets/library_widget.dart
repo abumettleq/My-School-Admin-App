@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CalendarWidget extends StatelessWidget {
-  const CalendarWidget({super.key});
+class LibraryWidget extends StatelessWidget {
+  const LibraryWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

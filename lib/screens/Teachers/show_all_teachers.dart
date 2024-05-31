@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Provider/people_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/Shared/notify_specific_user.dart';
-import 'package:my_school_admin_app/screens/Students/modify_specific_student.dart';
+import 'package:my_school_admin_app/screens/Teachers/modify_specifc_teacher.dart';
 import 'package:provider/provider.dart';
 
-class ShowAllStudents extends StatelessWidget {
-  const ShowAllStudents({super.key});
+class ShowAllTeachers extends StatelessWidget {
+  const ShowAllTeachers({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<StudentModel> searchedStudents = [];
+    List<TeacherModel> searchedTeachers = [];
     return Consumer<PeopleProvider>(builder: (context, peopleProvider, child) {
       return Container(
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
@@ -45,13 +45,12 @@ class ShowAllStudents extends StatelessWidget {
             ),
             Column(
               children: [
-                //implement search in this page
                 Center(
                   child: SearchBar(
-                    hintText: "Search a student...",
-                    controller: peopleProvider.searchStudentsController,
+                    hintText: "Search a teacher...",
+                    controller: peopleProvider.searchTeachersController,
                     onChanged: (value) {
-                      searchedStudents = peopleProvider.searchStudents(value);
+                      searchedTeachers = peopleProvider.searchTeachers(value);
                     },
                   ),
                 ),
@@ -78,10 +77,10 @@ class ShowAllStudents extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: 230.w,
+                              width: 200.w,
                               //height: 40.h,
                               child: Text(
-                                "Student Name",
+                                "Teacher Name",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
@@ -93,7 +92,7 @@ class ShowAllStudents extends StatelessWidget {
                               width: 180.w,
                               //height: 40.h,
                               child: Text(
-                                "Student ID",
+                                "Teacher ID",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
@@ -101,10 +100,10 @@ class ShowAllStudents extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 100.w,
+                              width: 170.w,
                               //height: 40.h,
                               child: Text(
-                                "Class",
+                                "Employment Status",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
@@ -112,10 +111,10 @@ class ShowAllStudents extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 250.w,
+                              width: 220.w,
                               //height: 40.h,
                               child: Text(
-                                "Address",
+                                "Email",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
@@ -155,40 +154,41 @@ class ShowAllStudents extends StatelessWidget {
                       SizedBox(
                         width: 1250.w,
                         height: MediaQuery.of(context).size.height - 115,
-                        child: peopleProvider.isStudentDataLoading
+                        child: peopleProvider.isTeachersDataLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.grey,
                                   ),
                                 )
-                              : peopleProvider.studentsData.isEmpty
+                              : peopleProvider.teachersData.isEmpty
                                   ? const Center(
-                                      child: Text("No student data fetched."),
+                                      child: Text("No teacher data fetched."),
                                     )
-                                  : peopleProvider.searchStudentsController.text
+                                  : peopleProvider.searchTeachersController.text
                                           .isNotEmpty
-                                      ? searchedStudents.isEmpty
+                                      ? searchedTeachers.isEmpty
                                           ? const Center(
-                                              child: Text("No students found."),
+                                              child: Text("No teachers found."),
                                             )
-                                          : createListView(searchedStudents)
+                                          : createListView(searchedTeachers)
                                       : createListView(
-                                          peopleProvider.studentsData)
+                                          peopleProvider.teachersData)
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+            const Spacer()
           ],
         ),
       );
     });
   }
 
-  Widget createListView(List<StudentModel> studentsData) {
+  Widget createListView(List<TeacherModel> teachersData) {
     return ListView.builder(
-        itemCount: studentsData.length,
+        itemCount: teachersData.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -201,10 +201,10 @@ class ShowAllStudents extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 230.w,
+                      width: 200.w,
                       //height: 60.h,
                       child: Text(
-                        "${studentsData[index].studentName} ${studentsData[index].fatherName}",
+                        teachersData[index].fullName,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -215,7 +215,7 @@ class ShowAllStudents extends StatelessWidget {
                       width: 180.w,
                       //height: 40.h,
                       child: Text(
-                        studentsData[index].studentID,
+                        teachersData[index].teacherID,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -223,10 +223,10 @@ class ShowAllStudents extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 100.w,
+                      width: 170.w,
                       //height: 40.h,
                       child: Text(
-                        studentsData[index].currentClass,
+                        teachersData[index].employmentStatus,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -234,10 +234,10 @@ class ShowAllStudents extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 250.w,
+                      width: 220.w,
                       //height: 40.h,
                       child: Text(
-                        studentsData[index].address,
+                        teachersData[index].email,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -248,7 +248,7 @@ class ShowAllStudents extends StatelessWidget {
                       width: 180.w,
                       //height: 40.h,
                       child: Text(
-                        studentsData[index].phoneNumber,
+                        teachersData[index].phoneNumber,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -266,8 +266,8 @@ class ShowAllStudents extends StatelessWidget {
                                     const Color.fromARGB(255, 212, 212, 212),
                               ),
                               onPressed: () {
-                                AppRouter.pushToWidget(ModifySpecificStudent(
-                                    studentModel: studentsData[index]));
+                                AppRouter.pushToWidget(ModifySpecificTeacher(
+                                    teacherModel: teachersData[index]));
                               },
                               icon: Icon(
                                 Icons.edit_attributes_outlined,
@@ -284,9 +284,9 @@ class ShowAllStudents extends StatelessWidget {
                                   backgroundColor:
                                       const Color.fromARGB(255, 212, 212, 212),
                                 ),
-                                onPressed: () {
-                                  peopleProvider.deleteUser(peopleProvider
-                                      .studentsData[index].studentID);
+                                onPressed: () async {
+                                  await peopleProvider.deleteUser(peopleProvider
+                                      .teachersData[index].teacherID);
                                 },
                                 icon: Icon(
                                   Icons.delete_forever_outlined,
@@ -304,7 +304,7 @@ class ShowAllStudents extends StatelessWidget {
                               ),
                               onPressed: () {
                                 AppRouter.pushToWidget(NotifySpecificUser(
-                                    userId: studentsData[index].studentID));
+                                    userId: teachersData[index].teacherID));
                               },
                               icon: Icon(
                                 Icons.notification_add,

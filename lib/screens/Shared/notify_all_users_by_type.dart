@@ -4,16 +4,16 @@ import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class NotifySpecificUser extends StatefulWidget {
-  final String userId;
+class NotifyAllUsersByType extends StatefulWidget {
+  final String type;
 
-  const NotifySpecificUser({Key? key, required this.userId}) : super(key: key);
+  const NotifyAllUsersByType({Key? key, required this.type}) : super(key: key);
 
   @override
-  _NotifySpecificUserState createState() => _NotifySpecificUserState();
+  _NotifyAllUsersByTypeState createState() => _NotifyAllUsersByTypeState();
 }
 
-class _NotifySpecificUserState extends State<NotifySpecificUser> {
+class _NotifyAllUsersByTypeState extends State<NotifyAllUsersByType> {
   late TextEditingController _notifController;
   late RoundedLoadingButtonController _btnController;
 
@@ -26,11 +26,12 @@ class _NotifySpecificUserState extends State<NotifySpecificUser> {
 
   @override
   Widget build(BuildContext context) {
+    String text = widget.type == "2" ? "Students" : "Teachers";
     return Consumer<PeopleProvider>(
       builder: (context, peopleProvider, child) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Notify User ${widget.userId}'),
+            title: Text('Notify All $text'),
             backgroundColor: Colors.indigo,
             elevation: 0,
           ),
@@ -47,7 +48,7 @@ class _NotifySpecificUserState extends State<NotifySpecificUser> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Send a Notification to User ${widget.userId}',
+                  'Send a Notification to All $text',
                   style: const TextStyle(
                     fontSize: 24,
                     color: Colors.white,
@@ -74,7 +75,7 @@ class _NotifySpecificUserState extends State<NotifySpecificUser> {
                 Center(
                   child: RoundedLoadingButton(
                     onPressed: () async {
-                      await peopleProvider.notifyUser(widget.userId, _notifController.text);
+                      await peopleProvider.notifyAll(widget.type, _notifController.text);
                       _btnController.reset();
                     },
                     controller: _btnController,

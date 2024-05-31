@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_school_admin_app/Provider/classes_excel_provider.dart';
+import 'package:my_school_admin_app/Provider/classes_provider.dart';
 import 'package:my_school_admin_app/Provider/feedbacks_provider.dart';
+import 'package:my_school_admin_app/Provider/people_provider.dart';
 import 'package:my_school_admin_app/Provider/student_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/teacher_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
@@ -21,6 +24,9 @@ void main() async {
         ChangeNotifierProvider<StudentExcelProvider>(create: (context) => StudentExcelProvider()),
         ChangeNotifierProvider<TeacherExcelProvider>(create: (context) => TeacherExcelProvider()),
         ChangeNotifierProvider<FeedbacksProvider>(create: (context) => FeedbacksProvider()),
+        ChangeNotifierProvider<ClassesExcelProvider>(create: (context) => ClassesExcelProvider()),
+        ChangeNotifierProvider<PeopleProvider>(create: (context) => PeopleProvider()),
+        ChangeNotifierProvider<ClassesProvider>(create: (context) => ClassesProvider()),
       ],
       child: const MyApp()  
     )

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_school_admin_app/Provider/people_provider.dart';
 import 'package:my_school_admin_app/Provider/student_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/teacher_excel_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
+import 'package:my_school_admin_app/Router/app_router.dart';
+import 'package:my_school_admin_app/screens/Shared/notify_all_users_by_type.dart';
 import 'package:my_school_admin_app/screens/Students/show_all_students.dart';
-import 'package:my_school_admin_app/screens/Teacher/show_all_teacher.dart';
+import 'package:my_school_admin_app/screens/Teachers/show_all_teachers.dart';
 import 'package:provider/provider.dart';
 
 class PeopleWidget extends StatelessWidget {
@@ -12,8 +15,8 @@ class PeopleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<StudentExcelProvider, TeacherExcelProvider,UserProvider>(
-        builder: (context, studentExcelProvider, teacherExcelProvider,userProvider, child) {
+    return Consumer3<StudentExcelProvider, TeacherExcelProvider, PeopleProvider>(
+        builder: (context, studentExcelProvider, teacherExcelProvider, peopleProvider, child) {
       return Container(
         width: 1290.w,
         height: 950.h,
@@ -96,8 +99,8 @@ class PeopleWidget extends StatelessWidget {
                                   showDialog(context: context, builder: (context){
                                     return const ShowAllStudents();
                                   });
-                                  userProvider.clearStudentsData();
-                                  await userProvider.getStudentData();
+                                  peopleProvider.clearStudentsData();
+                                  await peopleProvider.getStudentData();
                                 },
                                 child: Text(
                                   "Show All Students",
@@ -118,10 +121,10 @@ class PeopleWidget extends StatelessWidget {
                                   fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () {
-
+                                  AppRouter.pushToWidget(const NotifyAllUsersByType(type: "2"));
                                 },
                                 child: Text(
-                                  "Notify a Student",
+                                  "Notify All Students",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                                 ),
@@ -185,10 +188,10 @@ class PeopleWidget extends StatelessWidget {
                                 ),
                                 onPressed: () async{
                                   showDialog(context: context, builder: (context){
-                                    return const ShowAllTeacher();
+                                    return const ShowAllTeachers();
                                   });
-                                  userProvider.clearTeachersData();
-                                  await userProvider.getTeacherData();
+                                  peopleProvider.clearTeachersData();
+                                  await peopleProvider.getTeacherData();
                                 },
                                 child: Text(
                                   "Show All Teachers",
@@ -209,10 +212,10 @@ class PeopleWidget extends StatelessWidget {
                                   fixedSize: Size(225.w,40.h),
                                 ),
                                 onPressed: () {
-
+                                  AppRouter.pushToWidget(const NotifyAllUsersByType(type: "1"));
                                 },
                                 child: Text(
-                                  "Notify a Teacher",
+                                  "Notify All Teachers",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                                 ),

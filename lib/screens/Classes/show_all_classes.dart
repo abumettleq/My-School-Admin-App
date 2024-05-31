@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_school_admin_app/Model/teacher_model.dart';
-import 'package:my_school_admin_app/Provider/user_provider.dart';
+import 'package:my_school_admin_app/Model/class_model.dart';
+import 'package:my_school_admin_app/Provider/classes_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
-import 'package:my_school_admin_app/screens/Shared/notify_specific_user.dart';
-import 'package:my_school_admin_app/screens/Teacher/modify_specifc_teacher.dart';
+import 'package:my_school_admin_app/screens/Classes/notify_students_by_class.dart';
+import 'package:my_school_admin_app/screens/Classes/show_students_by_class.dart';
 import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class ShowAllTeacher extends StatelessWidget {
-  const ShowAllTeacher({super.key});
+class ShowAllClasses extends StatelessWidget {
+  const ShowAllClasses({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<TeacherModel> searchedTeachers = [];
-    return Consumer<UserProvider>(builder: (context, userProvider, child) {
+    List<ClassModel> searchedClasses = [];
+    return Consumer<ClassesProvider>(builder: (context, classesProvider, child) {
       return Container(
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
         child: Row(
@@ -46,10 +47,10 @@ class ShowAllTeacher extends StatelessWidget {
               children: [
                 Center(
                   child: SearchBar(
-                    hintText: "Search a teacher...",
-                    controller: userProvider.searchTeachersController,
+                    hintText: "Search a class...",
+                    controller: classesProvider.searchClassesController,
                     onChanged: (value) {
-                      searchedTeachers = userProvider.searchTeachers(value);
+                      searchedClasses = classesProvider.searchClasses(value);
                     },
                   ),
                 ),
@@ -79,7 +80,7 @@ class ShowAllTeacher extends StatelessWidget {
                               width: 200.w,
                               //height: 40.h,
                               child: Text(
-                                "Teacher Name",
+                                "Class Id",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
@@ -88,47 +89,27 @@ class ShowAllTeacher extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 180.w,
+                              width: 200.w,
                               //height: 40.h,
                               child: Text(
-                                "Teacher ID",
+                                "Class Name",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.justify,
                               ),
                             ),
                             SizedBox(
-                              width: 170.w,
+                              width: 200.w,
                               //height: 40.h,
                               child: Text(
-                                "Employment Status",
+                                "Class Section",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 17.sp,
                                     fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 220.w,
-                              //height: 40.h,
-                              child: Text(
-                                "Email",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 180.w,
-                              //height: 40.h,
-                              child: Text(
-                                "Contact Number",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17.sp,
-                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.justify,
                               ),
                             ),
                             SizedBox(
@@ -153,28 +134,25 @@ class ShowAllTeacher extends StatelessWidget {
                       SizedBox(
                         width: 1250.w,
                         height: MediaQuery.of(context).size.height - 115,
-                        child: Consumer<UserProvider>(
-                            builder: (context, userProvider, child) {
-                          return userProvider.isTeachersDataLoading
+                        child: classesProvider.isClassesDataLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.grey,
                                   ),
                                 )
-                              : userProvider.teachersData.isEmpty
+                              : classesProvider.classesData.isEmpty
                                   ? const Center(
-                                      child: Text("No teacher data fetched."),
+                                      child: Text("No class data fetched."),
                                     )
-                                  : userProvider.searchTeachersController.text
+                                  : classesProvider.searchClassesController.text
                                           .isNotEmpty
-                                      ? searchedTeachers.isEmpty
+                                      ? searchedClasses.isEmpty
                                           ? const Center(
-                                              child: Text("No teachers found."),
+                                              child: Text("No classes found."),
                                             )
-                                          : createListView(searchedTeachers)
+                                          : createListView(searchedClasses)
                                       : createListView(
-                                          userProvider.teachersData);
-                        }),
+                                          classesProvider.classesData)
                       ),
                     ],
                   ),
@@ -188,9 +166,9 @@ class ShowAllTeacher extends StatelessWidget {
     });
   }
 
-  Widget createListView(List<TeacherModel> teachersData) {
+  Widget createListView(List<ClassModel> classesData) {
     return ListView.builder(
-        itemCount: teachersData.length,
+        itemCount: classesData.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -206,7 +184,7 @@ class ShowAllTeacher extends StatelessWidget {
                       width: 200.w,
                       //height: 60.h,
                       child: Text(
-                        teachersData[index].fullName,
+                        classesData[index].id,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -214,10 +192,10 @@ class ShowAllTeacher extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 180.w,
-                      //height: 40.h,
+                      width: 200.w,
+                      //height: 60.h,
                       child: Text(
-                        teachersData[index].teacherID,
+                        classesData[index].name,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -225,32 +203,10 @@ class ShowAllTeacher extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 170.w,
-                      //height: 40.h,
+                      width: 200.w,
+                      //height: 60.h,
                       child: Text(
-                        teachersData[index].employmentStatus,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17.sp,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 220.w,
-                      //height: 40.h,
-                      child: Text(
-                        teachersData[index].email,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17.sp,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 180.w,
-                      //height: 40.h,
-                      child: Text(
-                        teachersData[index].phoneNumber,
+                        classesData[index].section,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.sp,
@@ -260,60 +216,61 @@ class ShowAllTeacher extends StatelessWidget {
                     SizedBox(
                       width: 150.w,
                       //height: 40.h,
-                      child: Row(
-                        children: [
-                          IconButton(
-                              style: IconButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 212, 212, 212),
+                      child: Consumer<ClassesProvider>(
+                        builder: (context, classesProvider, child) {
+                          return Row(
+                            children: [
+                              IconButton(
+                                  style: IconButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 212, 212, 212),
+                                  ),
+                                  onPressed: () async {
+                                    showDialog(context: context, builder: (context){
+                                        return const ShowStudentsByClass();
+                                      });
+                                      classesProvider.clearStudentsData();
+                                      await classesProvider.getStudentData(classesData[index].id);
+                                  },
+                                  icon: Icon(
+                                    Icons.view_list_outlined,
+                                    color: Colors.blueAccent,
+                                    size: 24.sp,
+                                  )),
+                              SizedBox(
+                                width: 10.w,
                               ),
-                              onPressed: () {
-                                AppRouter.pushToWidget(ModifySpecificTeacher(
-                                    teacherModel: teachersData[index]));
-                              },
-                              icon: Icon(
-                                Icons.edit_attributes_outlined,
-                                color: Colors.blueAccent,
-                                size: 24.sp,
-                              )),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Consumer<UserProvider>(
-                              builder: (context, userProvider, child) {
-                            return IconButton(
-                                style: IconButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 212, 212, 212),
-                                ),
-                                onPressed: () async {
-                                  await userProvider.deleteUser(userProvider
-                                      .teachersData[index].teacherID);
-                                },
-                                icon: Icon(
-                                  Icons.delete_forever_outlined,
-                                  color: Colors.redAccent,
-                                  size: 24.sp,
-                                ));
-                          }),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          IconButton(
-                              style: IconButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 212, 212, 212),
+                              RoundedLoadingButton(
+                                width: 50,
+                                color: const Color.fromARGB(255, 220, 220, 220),
+                                controller: classesProvider.clrBtnCntrl,
+                                    onPressed: () async {
+                                      await classesProvider.clearStudentsFromClass(classesData[index].id);
+                                    },
+                                    child: Icon(
+                                      Icons.group_remove_outlined,
+                                      color: Colors.redAccent,
+                                      size: 24.sp,
+                                    )),
+                              SizedBox(
+                                width: 10.w,
                               ),
-                              onPressed: () {
-                                AppRouter.pushToWidget(NotifySpecificUser(
-                                    userId: teachersData[index].teacherID));
-                              },
-                              icon: Icon(
-                                Icons.notification_add,
-                                color: Colors.green,
-                                size: 24.sp,
-                              )),
-                        ],
+                              IconButton(
+                                  style: IconButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 212, 212, 212),
+                                  ),
+                                  onPressed: () {
+                                    AppRouter.pushToWidget(NotifyStudentsByClass(classId: classesData[index].id));
+                                  },
+                                  icon: Icon(
+                                    Icons.notification_add,
+                                    color: Colors.green,
+                                    size: 24.sp,
+                                  )),
+                            ],
+                          );
+                        }
                       ),
                     ),
                   ],

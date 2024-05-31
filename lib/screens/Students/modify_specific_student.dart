@@ -70,6 +70,7 @@ class _ModifySpecificStudentState extends State<ModifySpecificStudent> {
             TextFormField(
               controller: _studentIdController,
               decoration: const InputDecoration(labelText: 'Student ID'),
+              enabled: false,
             ),
             TextFormField(
               controller: _studentNameController,

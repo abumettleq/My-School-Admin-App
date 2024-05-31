@@ -78,7 +78,7 @@ class AppRouter {
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(
           elevation: 0,
-            width: 400.w,
+            width: 600.w,
           backgroundColor: Colors.transparent,
           behavior: SnackBarBehavior.floating,
             content: Container(

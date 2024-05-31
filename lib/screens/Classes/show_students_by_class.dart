@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_school_admin_app/Helper/classes_helper.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Provider/classes_provider.dart';
 import 'package:my_school_admin_app/Provider/people_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
@@ -8,13 +10,13 @@ import 'package:my_school_admin_app/screens/Shared/notify_specific_user.dart';
 import 'package:my_school_admin_app/screens/Students/modify_specific_student.dart';
 import 'package:provider/provider.dart';
 
-class ShowAllStudents extends StatelessWidget {
-  const ShowAllStudents({super.key});
+class ShowStudentsByClass extends StatelessWidget {
+  const ShowStudentsByClass({super.key});
 
   @override
   Widget build(BuildContext context) {
     List<StudentModel> searchedStudents = [];
-    return Consumer<PeopleProvider>(builder: (context, peopleProvider, child) {
+    return Consumer<ClassesProvider>(builder: (context, classesProvider, child) {
       return Container(
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
         child: Row(
@@ -49,9 +51,9 @@ class ShowAllStudents extends StatelessWidget {
                 Center(
                   child: SearchBar(
                     hintText: "Search a student...",
-                    controller: peopleProvider.searchStudentsController,
+                    controller: classesProvider.searchStudentsController,
                     onChanged: (value) {
-                      searchedStudents = peopleProvider.searchStudents(value);
+                      searchedStudents = classesProvider.searchStudentsInClass(value);
                     },
                   ),
                 ),
@@ -155,17 +157,17 @@ class ShowAllStudents extends StatelessWidget {
                       SizedBox(
                         width: 1250.w,
                         height: MediaQuery.of(context).size.height - 115,
-                        child: peopleProvider.isStudentDataLoading
+                        child: classesProvider.isStudentDataLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.grey,
                                   ),
                                 )
-                              : peopleProvider.studentsData.isEmpty
+                              : classesProvider.studentsData.isEmpty
                                   ? const Center(
                                       child: Text("No student data fetched."),
                                     )
-                                  : peopleProvider.searchStudentsController.text
+                                  : classesProvider.searchStudentsController.text
                                           .isNotEmpty
                                       ? searchedStudents.isEmpty
                                           ? const Center(
@@ -173,7 +175,7 @@ class ShowAllStudents extends StatelessWidget {
                                             )
                                           : createListView(searchedStudents)
                                       : createListView(
-                                          peopleProvider.studentsData)
+                                          classesProvider.studentsData)
                       ),
                     ],
                   ),
