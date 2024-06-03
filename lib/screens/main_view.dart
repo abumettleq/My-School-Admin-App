@@ -25,8 +25,7 @@ class _MainViewState extends State<MainView> {
     0: [Icons.dashboard, "Dashboard", const DashboardWidget()],
     1: [Icons.people, "People", const PeopleWidget()],
     2: [Icons.people, "Classes", const ClassesWidget()],
-    3: [Icons.people, "Library", const LibraryWidget()],
-    4: [Icons.messenger_rounded, "Feedbacks", const FeedbacksWidget()],
+    3: [Icons.messenger_rounded, "Feedbacks", const FeedbacksWidget()],
   };
 
   Widget currentWidget = const DashboardWidget();

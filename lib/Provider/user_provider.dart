@@ -66,9 +66,8 @@ class UserProvider with ChangeNotifier {
               "Login failed", "Wrong Username or Password");
         } else {
           btnController.success();
-          Future.delayed(const Duration(milliseconds: 600), () async {
-            AppRouter.pushWithReplacementToWidget(const MainView());
-          });
+          categorizeDocuments();
+          AppRouter.pushWithReplacementToWidget(const MainView());
           userIDController.clear();
           passwordController.clear();
         }
@@ -86,11 +85,48 @@ class UserProvider with ChangeNotifier {
   int teachersNumber = 0;
   int studentsNumber = 0;
   int totalUsers = 0;
+  double studentsPercentage = 0.0;
+  double teachersPercentage = 0.0;
+  int feedbacksNumber = 0;
+  int newsNumber = 0;
+  int classesNumber = 0;
+  Map<String, int> libraryBooksNumber= {
+    "Arabic": 0,
+    "Art": 0,
+    "Chemistry": 0,
+    "English": 0,
+    "Geography": 0,
+    "History": 0,
+    "Islamic": 0,
+    "Math": 0,
+    "Persian": 0,
+    "Physics": 0,
+    "Science": 0,
+    "Technology": 0
+  };
+  bool isCategorizingDocuments = true;
   categorizeDocuments() async {
+    isCategorizingDocuments = true;
     await UserHelper.userHelper.categorizeDocuments();
-    studentsNumber = UserHelper.userHelper.studentDocuments.length;
-    teachersNumber = UserHelper.userHelper.teacherDocuments.length;
+    studentsNumber = UserHelper.userHelper.studentDocuments;
+    teachersNumber = UserHelper.userHelper.teacherDocuments;
     totalUsers = studentsNumber + teachersNumber;
+
+    if (totalUsers > 0) {
+      studentsPercentage = (studentsNumber / totalUsers) * 100;
+      teachersPercentage = (teachersNumber / totalUsers) * 100;
+    } else {
+      studentsPercentage = 0;
+      teachersPercentage = 0;
+    }
+
+    feedbacksNumber = UserHelper.userHelper.feedbackDocuments;
+    newsNumber = UserHelper.userHelper.newsDocuments;
+    classesNumber = UserHelper.userHelper.classesDocuments;
+
+    libraryBooksNumber = UserHelper.userHelper.libraryDocuments;
+
+    isCategorizingDocuments = false;
     notifyListeners();
   }
 
