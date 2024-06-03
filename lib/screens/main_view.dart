@@ -44,7 +44,7 @@ class _MainViewState extends State<MainView> {
     return Consumer<UserProvider>(
       builder: (context,userProvider,child) {
         return Scaffold(
-          backgroundColor: const Color(0xffffabdc),
+          backgroundColor: Color.fromARGB(255, 70, 162, 255),
           body: SingleChildScrollView(
             child: Column(
               children: [

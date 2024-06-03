@@ -196,7 +196,7 @@ class ShowAllTeachers extends StatelessWidget {
               Container(
                 color: index % 2 == 0
                     ? Colors.white
-                    : const Color.fromRGBO(243, 194, 252, 1.0),
+                    : const Color.fromARGB(255, 70, 162, 255),
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

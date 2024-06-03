@@ -69,7 +69,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),
@@ -90,7 +90,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),
@@ -115,7 +115,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),
@@ -160,7 +160,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),
@@ -181,7 +181,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),
@@ -206,7 +206,7 @@ class PeopleWidget extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
                                   backgroundColor:
-                                  const Color.fromRGBO(142, 90, 252, 1.0),
+                                  const Color.fromARGB(255, 70, 162, 255),
                                   foregroundColor:
                                   const Color.fromRGBO(255, 255, 255, 0.5),
                                   fixedSize: Size(225.w,40.h),

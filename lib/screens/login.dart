@@ -20,25 +20,29 @@ class LoginPage extends StatelessWidget {
       body: Consumer<UserProvider>(builder: (context, userProvider, child) {
         return Stack(
           children: [
-            Container(
-              width: 1600.w,
-              height: 1024.h,
-              alignment: Alignment.topRight,
-              decoration: const BoxDecoration(
-                color: Color(0xffffabdc),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Image.asset(
-                    'rectangle-1.png',
-                    width: 694.59.w,
-                    height: 1024.h,
-                    fit: BoxFit.fill,
-                  ),
-                ],
-              ),
-            ),
+          Container(
+  width: 1600.w,
+  height: 1024.h,
+  alignment: Alignment.topRight,
+  decoration: const BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage('schooback.jpg'), 
+      fit: BoxFit.cover,
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Image.asset(
+        'assets/rectangle-1.png',
+        width: 694.59.w,
+        height: 1024.h,
+        fit: BoxFit.fill,
+      ),
+    ],
+  ),
+),
+
             Form(
               key: userProvider.loginKey,
               child: AutofillGroup(
@@ -64,7 +68,7 @@ class LoginPage extends StatelessWidget {
                             Text(
                               "WELCOME",
                               style: TextStyle(
-                                  color: const Color.fromRGBO(142, 4, 103, 1.0),
+                                  color: const Color.fromARGB(255, 0, 21, 62),
                                   fontSize: 72.sp,
                                   fontFamily: 'risque'),
                             ),
@@ -83,8 +87,7 @@ class LoginPage extends StatelessWidget {
                                 decoration: InputDecoration(
                                     labelText: 'Username',
                                     labelStyle: TextStyle(
-                                        color: const Color.fromRGBO(
-                                            142, 4, 103, 1),
+                                        color: Color.fromARGB(255, 0, 21, 62),
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500),
                                     hintText: 'Enter your Username',
@@ -101,13 +104,13 @@ class LoginPage extends StatelessWidget {
                                       borderSide: const BorderSide(
                                           style: BorderStyle.solid,
                                           color:
-                                              Color.fromRGBO(142, 4, 103, 1)),
+                                              Color.fromARGB(255, 0, 21, 62)),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           style: BorderStyle.solid,
-                                          color: Color.fromRGBO(142, 4, 103, 1),
+                                          color: Color.fromARGB(255, 0, 21, 62),
                                           width: 1.5),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
@@ -135,8 +138,7 @@ class LoginPage extends StatelessWidget {
                                 decoration: InputDecoration(
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
-                                        color: const Color.fromRGBO(
-                                            142, 4, 103, 1),
+                                        color: const Color.fromARGB(255, 0, 21, 62),
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500),
                                     hintText: 'Enter your Password',
@@ -153,13 +155,13 @@ class LoginPage extends StatelessWidget {
                                       borderSide: const BorderSide(
                                           style: BorderStyle.solid,
                                           color:
-                                              Color.fromRGBO(142, 4, 103, 1)),
+                                              Color.fromARGB(255, 0, 21, 62)),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           style: BorderStyle.solid,
-                                          color: Color.fromRGBO(142, 4, 103, 1),
+                                          color: Color.fromARGB(255, 0, 21, 62),
                                           width: 1.5),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
@@ -190,7 +192,7 @@ class LoginPage extends StatelessWidget {
                                 loaderStrokeWidth: 4,
                                 loaderSize: 34.w,
                                 borderRadius: 40.r,
-                                color: const Color.fromRGBO(142, 4, 103, 1),
+                                color: const Color.fromARGB(255, 0, 21, 62),
                                 valueColor: Colors.white,
                                 height: 72.h,
                                 width: 340.w,
@@ -214,7 +216,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       const Spacer(),
                       SizedBox(
-                        width: 500.w,
+                        width: 700.w,
                         child: Column(
                           children: [
                             Row(
@@ -228,15 +230,15 @@ class LoginPage extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 41.h,
+                              height: 0.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   "rectangle.png",
-                                  width: 380.w,
-                                  height: 411.h,
+                                  width: 550.w,
+                                  height: 700.h,
                                 ),
                               ],
                             ),

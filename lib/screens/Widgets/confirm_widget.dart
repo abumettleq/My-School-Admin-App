@@ -44,7 +44,7 @@ class ConfirmWidget extends StatelessWidget {
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
-                    foregroundColor: Colors.pink,
+                    foregroundColor: Color.fromARGB(255, 1, 29, 80),
                   ),
                   onPressed: (){
                     AppRouter.pop();
@@ -63,7 +63,7 @@ class ConfirmWidget extends StatelessWidget {
                     return TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.pink,
+                        foregroundColor: Color.fromARGB(255, 2, 28, 99),
                       ),
                       onPressed: (){
                         feedbacksProvider.deleteFeedback(feedbackId);
