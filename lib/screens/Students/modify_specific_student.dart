@@ -164,7 +164,6 @@ class _ModifySpecificStudentState extends State<ModifySpecificStudent> {
         'address': widget.studentModel.address,
         'current_class': widget.studentModel.currentClass,
         'phone_number': widget.studentModel.phoneNumber,
-        'studentID': widget.studentModel.studentID,
       });
 
       // Show a success message or navigate to another page

@@ -124,4 +124,10 @@ class PeopleProvider with ChangeNotifier
     }
     notifyListeners();
   }
+
+  Map<String, dynamic> studentReport = {};
+  Future<void> getStudentReport() async
+  {
+    
+  }
 }

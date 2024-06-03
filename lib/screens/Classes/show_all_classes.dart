@@ -14,7 +14,8 @@ class ShowAllClasses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ClassModel> searchedClasses = [];
-    return Consumer<ClassesProvider>(builder: (context, classesProvider, child) {
+    return Consumer<ClassesProvider>(
+        builder: (context, classesProvider, child) {
       return Container(
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
         child: Row(
@@ -32,6 +33,7 @@ class ShowAllClasses extends StatelessWidget {
                           backgroundColor: Colors.white,
                         ),
                         onPressed: () {
+                          classesProvider.searchClassesController.clear();
                           AppRouter.pop();
                         },
                         icon: Icon(
@@ -132,9 +134,9 @@ class ShowAllClasses extends StatelessWidget {
                         color: Colors.black,
                       ),
                       SizedBox(
-                        width: 1250.w,
-                        height: MediaQuery.of(context).size.height - 115,
-                        child: classesProvider.isClassesDataLoading
+                          width: 1250.w,
+                          height: MediaQuery.of(context).size.height - 115,
+                          child: classesProvider.isClassesDataLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.grey,
@@ -152,8 +154,7 @@ class ShowAllClasses extends StatelessWidget {
                                             )
                                           : createListView(searchedClasses)
                                       : createListView(
-                                          classesProvider.classesData)
-                      ),
+                                          classesProvider.classesData)),
                     ],
                   ),
                 ),
@@ -217,61 +218,89 @@ class ShowAllClasses extends StatelessWidget {
                       width: 150.w,
                       //height: 40.h,
                       child: Consumer<ClassesProvider>(
-                        builder: (context, classesProvider, child) {
-                          return Row(
-                            children: [
-                              IconButton(
-                                  style: IconButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 212, 212, 212),
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(context: context, builder: (context){
+                          builder: (context, classesProvider, child) {
+                        return Row(
+                          children: [
+                            IconButton(
+                                style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 212, 212, 212),
+                                ),
+                                onPressed: () async {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
                                         return const ShowStudentsByClass();
                                       });
-                                      classesProvider.clearStudentsData();
-                                      await classesProvider.getStudentData(classesData[index].id);
-                                  },
-                                  icon: Icon(
-                                    Icons.view_list_outlined,
-                                    color: Colors.blueAccent,
-                                    size: 24.sp,
-                                  )),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              RoundedLoadingButton(
-                                width: 50,
-                                color: const Color.fromARGB(255, 220, 220, 220),
-                                controller: classesProvider.clrBtnCntrl,
-                                    onPressed: () async {
-                                      await classesProvider.clearStudentsFromClass(classesData[index].id);
-                                    },
-                                    child: Icon(
-                                      Icons.group_remove_outlined,
-                                      color: Colors.redAccent,
-                                      size: 24.sp,
-                                    )),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              IconButton(
-                                  style: IconButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 212, 212, 212),
-                                  ),
-                                  onPressed: () {
-                                    AppRouter.pushToWidget(NotifyStudentsByClass(classId: classesData[index].id));
-                                  },
-                                  icon: Icon(
-                                    Icons.notification_add,
-                                    color: Colors.green,
-                                    size: 24.sp,
-                                  )),
-                            ],
-                          );
-                        }
-                      ),
+                                  classesProvider.clearStudentsData();
+                                  await classesProvider
+                                      .getStudentData(classesData[index].id);
+                                },
+                                icon: Icon(
+                                  Icons.view_list_outlined,
+                                  color: Colors.blueAccent,
+                                  size: 24.sp,
+                                )),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            IconButton(
+                                style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 212, 212, 212),
+                                ),
+                                onPressed: () async {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text('System'),
+                                          content: Text(
+                                              "Are you sure you want to clear class '${classesData[index].id}'?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () =>
+                                                  AppRouter.pop(),
+                                              child: const Text('No'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                await classesProvider
+                                                    .clearStudentsFromClass(
+                                                        classesData[index].id);
+                                                AppRouter.pop();
+                                              },
+                                              child: const Text('Yes'),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
+                                icon: Icon(
+                                  Icons.group_remove_outlined,
+                                  color: Colors.redAccent,
+                                  size: 24.sp,
+                                )),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            IconButton(
+                                style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 212, 212, 212),
+                                ),
+                                onPressed: () {
+                                  AppRouter.pushToWidget(NotifyStudentsByClass(
+                                      classId: classesData[index].id));
+                                },
+                                icon: Icon(
+                                  Icons.notification_add,
+                                  color: Colors.green,
+                                  size: 24.sp,
+                                )),
+                          ],
+                        );
+                      }),
                     ),
                   ],
                 ),

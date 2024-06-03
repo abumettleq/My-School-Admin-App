@@ -86,7 +86,6 @@ class ClassesProvider with ChangeNotifier
   Future<void> clearStudentsFromClass(String classId) async
   {
     await ClassesHelper.classesHelper.clearStudentsFromClass(classId);
-    clrBtnCntrl.reset();
     AppRouter.pop();
     AppRouter.showSnackBar(
           "Success", "Students in class '$classId' were cleared successfully.");
@@ -98,6 +97,10 @@ class ClassesProvider with ChangeNotifier
     await ClassesHelper.classesHelper.notifyStudentsByClass(classId, text);
     AppRouter.showSnackBar(
           "Success", "Students in class '$classId' were notified successfully.");
+    notifyListeners();
+  }
+
+  void internallyNotifyListeners() {
     notifyListeners();
   }
 }

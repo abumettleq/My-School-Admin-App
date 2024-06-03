@@ -148,7 +148,6 @@ class _ModifySpecificTeacherState extends State<ModifySpecificTeacher> {
 
     // Update the document with the new teacher model data
     await teachers.doc('profile').update({
-      'teacherID': widget.teacherModel.teacherID,
       'nId': widget.teacherModel.nID,
       'full_name': widget.teacherModel.fullName,
       'gender': widget.teacherModel.gender,

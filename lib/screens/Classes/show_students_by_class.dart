@@ -16,7 +16,8 @@ class ShowStudentsByClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<StudentModel> searchedStudents = [];
-    return Consumer<ClassesProvider>(builder: (context, classesProvider, child) {
+    return Consumer<ClassesProvider>(
+        builder: (context, classesProvider, child) {
       return Container(
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2)),
         child: Row(
@@ -34,6 +35,7 @@ class ShowStudentsByClass extends StatelessWidget {
                           backgroundColor: Colors.white,
                         ),
                         onPressed: () {
+                          classesProvider.searchStudentsController.clear();
                           AppRouter.pop();
                         },
                         icon: Icon(
@@ -53,7 +55,8 @@ class ShowStudentsByClass extends StatelessWidget {
                     hintText: "Search a student...",
                     controller: classesProvider.searchStudentsController,
                     onChanged: (value) {
-                      searchedStudents = classesProvider.searchStudentsInClass(value);
+                      searchedStudents =
+                          classesProvider.searchStudentsInClass(value);
                     },
                   ),
                 ),
@@ -155,9 +158,9 @@ class ShowStudentsByClass extends StatelessWidget {
                         color: Colors.black,
                       ),
                       SizedBox(
-                        width: 1250.w,
-                        height: MediaQuery.of(context).size.height - 115,
-                        child: classesProvider.isStudentDataLoading
+                          width: 1250.w,
+                          height: MediaQuery.of(context).size.height - 115,
+                          child: classesProvider.isStudentDataLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.grey,
@@ -167,16 +170,15 @@ class ShowStudentsByClass extends StatelessWidget {
                                   ? const Center(
                                       child: Text("No student data fetched."),
                                     )
-                                  : classesProvider.searchStudentsController.text
-                                          .isNotEmpty
+                                  : classesProvider.searchStudentsController
+                                          .text.isNotEmpty
                                       ? searchedStudents.isEmpty
                                           ? const Center(
                                               child: Text("No students found."),
                                             )
                                           : createListView(searchedStudents)
                                       : createListView(
-                                          classesProvider.studentsData)
-                      ),
+                                          classesProvider.studentsData)),
                     ],
                   ),
                 ),
@@ -287,8 +289,30 @@ class ShowStudentsByClass extends StatelessWidget {
                                       const Color.fromARGB(255, 212, 212, 212),
                                 ),
                                 onPressed: () {
-                                  peopleProvider.deleteUser(peopleProvider
-                                      .studentsData[index].studentID);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text('System'),
+                                          content: Text(
+                                              "Are you sure you want to remove student '${studentsData[index].studentID}' from the database?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => AppRouter.pop(),
+                                              child: const Text('No'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                await peopleProvider.deleteUser(
+                                                    studentsData[index]
+                                                        .studentID);
+                                                AppRouter.pop();
+                                              },
+                                              child: const Text('Yes'),
+                                            ),
+                                          ],
+                                        );
+                                      });
                                 },
                                 icon: Icon(
                                   Icons.delete_forever_outlined,

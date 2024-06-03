@@ -46,6 +46,7 @@ dependencies:
   internet_connection_checker_plus: ^2.0.0
   firebase_analytics: ^10.4.5
   intl: ^0.18.1
+  fl_chart: ^0.65.0
 
 dev_dependencies:
   flutter_test:

@@ -138,4 +138,25 @@ class PeopleHelper
       debugPrint("Error: $e");
     }
   }
+
+  Future<Map<String, dynamic>> getStudentReportById(String studentId) async
+  {
+    Map<String, dynamic> studentReport = {};
+
+    DocumentReference docRef = FirebaseFirestore.instance.collection('users')
+      .doc(studentId)
+      .collection('itemMenu')
+      .doc('profile');
+
+    try
+    {
+        
+    }
+    catch(e)
+    {
+      debugPrint("Error: $e");
+    }
+
+    return studentReport;
+  } 
 }

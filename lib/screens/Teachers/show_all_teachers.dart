@@ -32,6 +32,7 @@ class ShowAllTeachers extends StatelessWidget {
                           backgroundColor: Colors.white,
                         ),
                         onPressed: () {
+                          peopleProvider.searchTeachersController.clear();
                           AppRouter.pop();
                         },
                         icon: Icon(
@@ -285,8 +286,30 @@ class ShowAllTeachers extends StatelessWidget {
                                       const Color.fromARGB(255, 212, 212, 212),
                                 ),
                                 onPressed: () async {
-                                  await peopleProvider.deleteUser(peopleProvider
-                                      .teachersData[index].teacherID);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text('System'),
+                                          content: Text(
+                                              "Are you sure you want to remove teacher '${teachersData[index].teacherID}' from the database?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => AppRouter.pop(),
+                                              child: const Text('No'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                await peopleProvider.deleteUser(
+                                                    teachersData[index]
+                                                        .teacherID);
+                                                AppRouter.pop();
+                                              },
+                                              child: const Text('Yes'),
+                                            ),
+                                          ],
+                                        );
+                                      });
                                 },
                                 icon: Icon(
                                   Icons.delete_forever_outlined,
