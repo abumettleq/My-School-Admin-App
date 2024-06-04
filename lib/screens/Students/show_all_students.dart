@@ -5,6 +5,7 @@ import 'package:my_school_admin_app/Provider/people_provider.dart';
 import 'package:my_school_admin_app/Provider/user_provider.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 import 'package:my_school_admin_app/screens/Shared/notify_specific_user.dart';
+import 'package:my_school_admin_app/screens/Students/generate_student_report.dart';
 import 'package:my_school_admin_app/screens/Students/modify_specific_student.dart';
 import 'package:provider/provider.dart';
 
@@ -135,7 +136,7 @@ class ShowAllStudents extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 150.w,
+                              width: 200.w,
                               //height: 40.h,
                               child: Text(
                                 "Record",
@@ -257,7 +258,7 @@ class ShowAllStudents extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 150.w,
+                      width: 200.w,
                       //height: 40.h,
                       child: Row(
                         children: [
@@ -334,6 +335,28 @@ class ShowAllStudents extends StatelessWidget {
                                 color: Colors.green,
                                 size: 24.sp,
                               )),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Consumer<PeopleProvider>(
+                                builder: (context, peopleProvider, child) {
+                                  return IconButton(
+                                  style: IconButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 212, 212, 212),
+                                  ),
+                                  onPressed: () {
+                                    peopleProvider.getStudentReport(studentsData[index].studentID, studentsData[index].currentClass);
+                                    AppRouter.pushToWidget(StudentReport(
+                                        studentId: studentsData[index].studentID));
+                                  },
+                                  icon: Icon(
+                                    Icons.report_outlined,
+                                    color: Colors.yellow,
+                                    size: 24.sp,
+                                  ));
+                                }
+                              ),
                         ],
                       ),
                     ),

@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_admin_app/Model/attendance_model.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Model/student_report_model.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
 
 class PeopleHelper
@@ -139,17 +141,54 @@ class PeopleHelper
     }
   }
 
-  Future<Map<String, dynamic>> getStudentReportById(String studentId) async
+  Future<StudentReportModel> getStudentReportById(String studentId, String classId) async
   {
-    Map<String, dynamic> studentReport = {};
-
-    DocumentReference docRef = FirebaseFirestore.instance.collection('users')
-      .doc(studentId)
-      .collection('itemMenu')
-      .doc('profile');
-
+    StudentReportModel studentReport = StudentReportModel();
     try
     {
+      DocumentSnapshot profileSnapshot = await FirebaseFirestore.instance.collection('users')
+      .doc(studentId)
+      .collection('itemMenu')
+      .doc('profile')
+      .get();
+      studentReport.student = StudentModel.fromMap(profileSnapshot.data() as Map<String, dynamic>);
+
+      QuerySnapshot subjectSnapshot = await FirebaseFirestore.instance.collection('users')
+      .doc(studentId)
+      .collection('itemMenu')
+      .doc('results')
+      .collection('Class-$classId').get();
+      for(var subjectDoc in subjectSnapshot.docs)
+      {
+        studentReport.results.addAll(
+          {
+            subjectDoc.id : {
+              'FirstMonthExam' : subjectDoc.get('FirstMonthExam') ?? 'N/A',
+              'SecondMonthExam' : subjectDoc.get('SecondMonthExam') ?? 'N/A',
+              'ThirdMonthExam' : subjectDoc.get('ThirdMonthExam') ?? 'N/A',
+              'MidtermExam' : subjectDoc.get('MidtermExam') ?? 'N/A',
+              'FinaltermExam' : subjectDoc.get('FinaltermExam') ?? 'N/A'
+            }
+          }
+        );
+      }
+
+      QuerySnapshot attendanceSnapshot = await FirebaseFirestore.instance.collection('users')
+      .doc(studentId)
+      .collection('itemMenu')
+      .doc('attendance')
+      .collection('Class-$classId').get();
+      for(var attendance in attendanceSnapshot.docs)
+      {
+        AttendanceModel attendanceModel = AttendanceModel();
+        
+        attendanceModel.attendanceDate = attendance.id;
+        attendanceModel.givenBy = attendance.get('givenBy') ?? "";
+        attendanceModel.statusGiven = attendance.get('statusGiven') ?? "";
+        attendanceModel.weekday = attendance.get('weekday') ?? "";
+
+        studentReport.attendance.add(attendanceModel);
+      }
         
     }
     catch(e)

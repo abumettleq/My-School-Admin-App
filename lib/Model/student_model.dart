@@ -11,6 +11,7 @@ class StudentModel{
   String email = '';
   String academicYear = '';
   String currentClass = '';
+  String image = '';
 
   StudentModel();
 

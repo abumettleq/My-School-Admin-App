@@ -3,6 +3,7 @@ import 'package:my_school_admin_app/Helper/classes_helper.dart';
 import 'package:my_school_admin_app/Helper/people_helper.dart';
 import 'package:my_school_admin_app/Model/class_model.dart';
 import 'package:my_school_admin_app/Model/student_model.dart';
+import 'package:my_school_admin_app/Model/student_report_model.dart';
 import 'package:my_school_admin_app/Model/teacher_model.dart';
 import 'package:my_school_admin_app/Router/app_router.dart';
 
@@ -125,9 +126,13 @@ class PeopleProvider with ChangeNotifier
     notifyListeners();
   }
 
-  Map<String, dynamic> studentReport = {};
-  Future<void> getStudentReport() async
+  StudentReportModel studentReport = StudentReportModel();
+  bool isStudentReportLoading = true;
+  Future<void> getStudentReport(String studentId, String classId) async
   {
-    
+    isStudentReportLoading = true;
+    studentReport = await PeopleHelper.peopleHelper.getStudentReportById(studentId, classId);
+    isStudentReportLoading = false;
+    notifyListeners();
   }
 }
