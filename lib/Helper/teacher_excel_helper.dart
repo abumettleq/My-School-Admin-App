@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_school_admin_app/Helper/md5_helper.dart';
 import 'package:my_school_admin_app/Model/teacher_excel_model.dart';
 
 class TeacherExcelHelper {
@@ -10,7 +11,7 @@ class TeacherExcelHelper {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(teacherExcelFile.teacherID)
-          .set({'password': 'A${teacherExcelFile.teacherID}a', 'type': '1'});
+          .set({'password': Md5Hepler.md5Helper.generateMd5('A${teacherExcelFile.teacherID}a'), 'type': '1'});
 
       await FirebaseFirestore.instance
           .collection('users')

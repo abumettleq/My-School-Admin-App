@@ -19,6 +19,7 @@ class UserHelper {
   String? userID;
 
   Future<UserModel?> login(String id, String password) async {
+    log("Pass: $password");
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await userCollection.doc(id).get();
 

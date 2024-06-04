@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:my_school_admin_app/Helper/classes_helper.dart';
+import 'package:my_school_admin_app/Helper/md5_helper.dart';
 import 'package:my_school_admin_app/Helper/people_helper.dart';
 import 'package:my_school_admin_app/Helper/user_helper.dart';
 import 'package:my_school_admin_app/Model/admin_model.dart';
@@ -59,7 +60,7 @@ class UserProvider with ChangeNotifier {
     if (result) {
       if (loginKey.currentState!.validate()) {
         userModel = await UserHelper.userHelper
-            .login(userIDController.text, passwordController.text);
+            .login(userIDController.text, Md5Hepler.md5Helper.generateMd5(passwordController.text));
         if (userModel == null) {
           btnController.reset();
           AppRouter.showErrorSnackBar(
