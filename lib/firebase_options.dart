@@ -37,11 +37,12 @@ class DefaultFirebaseOptions {
     }
   }
 
+    // provide yor own keys
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDNNbaSO0J1px6MLV3QHvupAMEVDlN7v_8',
-    appId: '1:14084816707:web:29e07c797a2bf50c89b9f6',
-    messagingSenderId: '14084816707',
-    projectId: 'myschool-48ec8',
-    storageBucket: 'myschool-48ec8.appspot.com',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
   );
 }
